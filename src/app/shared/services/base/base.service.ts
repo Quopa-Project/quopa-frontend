@@ -15,10 +15,11 @@ export class BaseService<T> {
     return throwError(() => error.error);
   }
 
-  getAll(): Observable<T> {
-    return this.http.get<T>(`${this.basePath}`, {
+  getObject(): Observable<T> {
+    return this.http.get<T>(`${this.basePath}/my`, {
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
     }).pipe(catchError(this.handleError));
   }

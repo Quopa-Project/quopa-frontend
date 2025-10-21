@@ -12,12 +12,18 @@ import {MatInput} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import { ErrorSnackBar } from './shared/pages/error-snack-bar/error-snack-bar';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { HomePrincipal } from './core/pages/home-principal/home-principal';
+import { HomeAdmin } from './core/pages/home-admin/home-admin';
+import { PageNotFound } from './shared/pages/page-not-found/page-not-found';
 
 @NgModule({
   declarations: [
     App,
     Login,
-    ErrorSnackBar
+    ErrorSnackBar,
+    HomePrincipal,
+    HomeAdmin,
+    PageNotFound
   ],
   imports: [
     BrowserModule,

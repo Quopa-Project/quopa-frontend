@@ -1,0 +1,14 @@
+<div style="display: flex; flex-direction: column; height: 100%">
+    <div style="flex: 1;"></div>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+        <h1 style="text-align: center; line-height: normal; margin: 0">Página de Inicio de Administrador de Restaurante</h1>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;">
+            <button matButton="filled" [routerLink]="['/manage-extras']">Gestionar Extras</button>
+        </div>
+    </div>
+    <div style="flex: 1; display: flex; justify-content: end; align-items: end; margin: 0 15px 15px 0">
+        <button matButton="filled" (click)="signOut()" style="background-color: #ff6464">
+            Cerrar Sesión
+        </button>
+    </div>
+</div>

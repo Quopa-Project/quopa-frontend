@@ -1,0 +1,10 @@
+<div style="height: 100%;">
+    @switch (role) {
+        @case ('ADMIN') {
+            <app-home-admin [role]="role"></app-home-admin>
+        }
+        @default {
+            <app-page-not-found [injected]="true"></app-page-not-found>
+        }
+    }
+</div>

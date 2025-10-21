@@ -8,13 +8,13 @@
         <mat-label>Contraseña</mat-label>
         <input matInput type="password" [(ngModel)]="loginDto.password">
     </mat-form-field>
-    <button matButton="filled" (click)="login()">
+    <button matButton="filled" (click)="login()" [disabled]="loading">
         Iniciar Sesión
     </button>
-    <button matButton="filled" (click)="register()">
+    <button matButton="filled" (click)="register()" [disabled]="loading">
         Registrarse
     </button>
-    <button matButton [routerLink]="['/forget-password']">
+    <button matButton [routerLink]="['/forget-password']" [disabled]="loading">
         Olvidé mi contraseña
     </button>
     <span>Versión 0.0.1</span>
