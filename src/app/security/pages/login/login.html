@@ -1,0 +1,21 @@
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 16px;">
+    <h1 style="margin: 0">Iniciar Sesión</h1>
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>Correo Electrónico</mat-label>
+        <input matInput [(ngModel)]="loginDto.email">
+    </mat-form-field>
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" [(ngModel)]="loginDto.password">
+    </mat-form-field>
+    <button matButton="filled" (click)="login()">
+        Iniciar Sesión
+    </button>
+    <button matButton="filled" (click)="register()">
+        Registrarse
+    </button>
+    <button matButton [routerLink]="['/forget-password']">
+        Olvidé mi contraseña
+    </button>
+    <span>Versión 0.0.1</span>
+</div>

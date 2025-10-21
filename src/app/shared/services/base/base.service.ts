@@ -1,0 +1,25 @@
+import { Injectable } from '@angular/core';
+import {environment} from "../../../../environment/environment";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {catchError, Observable, throwError} from "rxjs";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class BaseService<T> {
+  basePath: string = environment.apiUrl;
+
+  constructor(public http: HttpClient) { }
+
+  handleError(error: HttpErrorResponse) {
+    return throwError(() => error.error);
+  }
+
+  getAll(): Observable<T> {
+    return this.http.get<T>(`${this.basePath}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    }).pipe(catchError(this.handleError));
+  }
+}
