@@ -15,6 +15,9 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { HomePrincipal } from './core/pages/home-principal/home-principal';
 import { HomeAdmin } from './core/pages/home-admin/home-admin';
 import { PageNotFound } from './shared/pages/page-not-found/page-not-found';
+import { ManageBranches } from './admin/pages/manage-branches/manage-branches';
+import { HomeBranch } from './core/pages/home-branch/home-branch';
+import {MatIcon} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -23,7 +26,9 @@ import { PageNotFound } from './shared/pages/page-not-found/page-not-found';
     ErrorSnackBar,
     HomePrincipal,
     HomeAdmin,
-    PageNotFound
+    PageNotFound,
+    ManageBranches,
+    HomeBranch
   ],
   imports: [
     BrowserModule,
@@ -33,7 +38,8 @@ import { PageNotFound } from './shared/pages/page-not-found/page-not-found';
     MatFormFieldModule,
     MatInput,
     FormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatIcon
   ],
   providers: [
     provideHttpClient(),
