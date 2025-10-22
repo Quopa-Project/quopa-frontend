@@ -11,6 +11,10 @@ export class UserAuxService {
     this.user = user;
   }
 
+  getUser(): UserDto {
+    return this.user;
+  }
+
   getUserRole(): string {
     return this.user.role;
   }

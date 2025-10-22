@@ -1,5 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Router} from "@angular/router";
+import {UserDto} from "../../models/user.dto";
+import {UserAuxService} from "../../../shared/services/user-aux/user-aux.service";
 
 @Component({
   selector: 'app-home-admin',
@@ -10,7 +12,11 @@ import {Router} from "@angular/router";
 export class HomeAdmin {
   @Input() role: string = '';
 
-  constructor(private router: Router) {}
+  user: UserDto;
+
+  constructor(private router: Router, public userAuxService: UserAuxService) {
+    this.user = userAuxService.getUser();
+  }
 
   signOut() {
     localStorage.clear();
