@@ -5,15 +5,18 @@ import {UserService} from "../services/user/user.service";
 import {catchError, map, of} from "rxjs";
 import {ErrorMessage} from "../../shared/models/error-message";
 import {ErrorSnackBar} from "../../shared/pages/error-snack-bar/error-snack-bar";
+import {UserAuxService} from "../../shared/services/user-aux/user-aux.service";
 
 export const tokenGuard: CanActivateFn = () => {
   const router = inject(Router);
   const snackBar = inject(MatSnackBar);
   const userService = inject(UserService);
+  const userAuxService = inject(UserAuxService);
 
   if (localStorage.getItem('token')) {
     return userService.getObject().pipe(
-        map(() => {
+        map((response) => {
+          userAuxService.setUser(response.user);
           return true;
         }),
         catchError((error: ErrorMessage) => {

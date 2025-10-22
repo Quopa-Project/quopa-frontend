@@ -18,6 +18,12 @@ import { PageNotFound } from './shared/pages/page-not-found/page-not-found';
 import { ManageBranches } from './admin/pages/manage-branches/manage-branches';
 import { HomeBranch } from './core/pages/home-branch/home-branch';
 import {MatIcon} from "@angular/material/icon";
+import { ProfilePrincipal } from './core/pages/profile-principal/profile-principal';
+import { ProfileAdmin } from './core/pages/profile-admin/profile-admin';
+import { ProfileBranch } from './core/pages/profile-branch/profile-branch';
+import { DashboardPrincipal } from './core/pages/dashboard-principal/dashboard-principal';
+import { DashboardAdmin } from './core/pages/dashboard-admin/dashboard-admin';
+import { DashboardBranch } from './core/pages/dashboard-branch/dashboard-branch';
 
 @NgModule({
   declarations: [
@@ -28,7 +34,13 @@ import {MatIcon} from "@angular/material/icon";
     HomeAdmin,
     PageNotFound,
     ManageBranches,
-    HomeBranch
+    HomeBranch,
+    ProfilePrincipal,
+    ProfileAdmin,
+    ProfileBranch,
+    DashboardPrincipal,
+    DashboardAdmin,
+    DashboardBranch
   ],
   imports: [
     BrowserModule,
