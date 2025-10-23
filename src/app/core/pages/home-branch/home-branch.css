@@ -1,0 +1,18 @@
+.branch-layout-desktop {
+    display: flex;
+    flex-direction: column;
+}
+.branch-layout-mobile {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .branch-layout-desktop {
+        display: none;
+    }
+    .branch-layout-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+}
