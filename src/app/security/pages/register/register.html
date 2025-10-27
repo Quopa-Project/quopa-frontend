@@ -1,0 +1,30 @@
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 16px; background-color: white">
+    <h1 style="margin: 0">Registro de Usuario</h1>
+    <div class="button-container">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-label>Nombre</mat-label>
+            <input matInput [(ngModel)]="registerDto.name">
+        </mat-form-field>
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-label>Apellido</mat-label>
+            <input matInput [(ngModel)]="registerDto.lastName">
+        </mat-form-field>
+    </div>
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>Teléfono Celular</mat-label>
+        <input matInput type="number" [(ngModel)]="registerDto.phoneNumber">
+    </mat-form-field>
+    <div class="button-container">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-label>Correo Electrónico</mat-label>
+            <input matInput [(ngModel)]="registerDto.email">
+        </mat-form-field>
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-label>Contraseña</mat-label>
+            <input matInput type="password" [(ngModel)]="registerDto.password">
+        </mat-form-field>
+    </div>
+    <button matButton="filled" (click)="register()" [disabled]="loading">
+        Registrarse
+    </button>
+</div>

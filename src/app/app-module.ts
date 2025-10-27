@@ -24,6 +24,7 @@ import { ProfileBranch } from './core/pages/profile-branch/profile-branch';
 import { DashboardPrincipal } from './core/pages/dashboard-principal/dashboard-principal';
 import { DashboardAdmin } from './core/pages/dashboard-admin/dashboard-admin';
 import { DashboardBranch } from './core/pages/dashboard-branch/dashboard-branch';
+import { Register } from './security/pages/register/register';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { DashboardBranch } from './core/pages/dashboard-branch/dashboard-branch'
     ProfileBranch,
     DashboardPrincipal,
     DashboardAdmin,
-    DashboardBranch
+    DashboardBranch,
+    Register
   ],
   imports: [
     BrowserModule,

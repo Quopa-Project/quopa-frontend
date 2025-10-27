@@ -10,9 +10,11 @@ import {ProfilePrincipal} from "./core/pages/profile-principal/profile-principal
 import {DashboardPrincipal} from "./core/pages/dashboard-principal/dashboard-principal";
 import {adminRoleGuard} from "./core/guards/admin-role-guard";
 import {correctRoleGuard} from "./core/guards/correct-role-guard";
+import {Register} from "./security/pages/register/register";
 
 const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noTokenGuard] },
+  { path: 'register', component: Register, canActivate: [noTokenGuard] },
   {
     path: 'home/:role',
     component: HomePrincipal,
