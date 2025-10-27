@@ -27,6 +27,9 @@ import { DashboardBranch } from './core/pages/dashboard-branch/dashboard-branch'
 import { Register } from './security/pages/register/register';
 import { VerifyAccount } from './security/pages/verify-account/verify-account';
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
+import { ForgetPassword } from './security/pages/forget-password/forget-password';
+import {MatStepperModule} from "@angular/material/stepper";
+import {MatCheckbox} from "@angular/material/checkbox";
 
 @NgModule({
   declarations: [
@@ -45,7 +48,8 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
     DashboardAdmin,
     DashboardBranch,
     Register,
-    VerifyAccount
+    VerifyAccount,
+    ForgetPassword
   ],
   imports: [
     BrowserModule,
@@ -57,7 +61,9 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
     FormsModule,
     MatSnackBarModule,
     MatIcon,
-    MatProgressSpinner
+    MatProgressSpinner,
+    MatStepperModule,
+    MatCheckbox
   ],
   providers: [
     provideHttpClient(),
