@@ -25,6 +25,8 @@ import { DashboardPrincipal } from './core/pages/dashboard-principal/dashboard-p
 import { DashboardAdmin } from './core/pages/dashboard-admin/dashboard-admin';
 import { DashboardBranch } from './core/pages/dashboard-branch/dashboard-branch';
 import { Register } from './security/pages/register/register';
+import { VerifyAccount } from './security/pages/verify-account/verify-account';
+import {MatProgressSpinner} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { Register } from './security/pages/register/register';
     DashboardPrincipal,
     DashboardAdmin,
     DashboardBranch,
-    Register
+    Register,
+    VerifyAccount
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,8 @@ import { Register } from './security/pages/register/register';
     MatInput,
     FormsModule,
     MatSnackBarModule,
-    MatIcon
+    MatIcon,
+    MatProgressSpinner
   ],
   providers: [
     provideHttpClient(),
