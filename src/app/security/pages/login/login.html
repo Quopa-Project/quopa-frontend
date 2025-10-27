@@ -11,7 +11,7 @@
     <button matButton="filled" (click)="login()" [disabled]="loading">
         Iniciar Sesión
     </button>
-    <button matButton="filled" (click)="register()" [disabled]="loading">
+    <button matButton="filled" [routerLink]="['/register']" [disabled]="loading">
         Registrarse
     </button>
     <button matButton [routerLink]="['/forget-password']" [disabled]="loading">
