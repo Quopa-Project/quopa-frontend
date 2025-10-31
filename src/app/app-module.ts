@@ -6,7 +6,7 @@ import { App } from './app';
 import {provideHttpClient} from "@angular/common/http";
 import {MatToolbar} from "@angular/material/toolbar";
 import { Login } from './security/pages/login/login';
-import {MatButton} from "@angular/material/button";
+import {MatButton, MatIconButton} from "@angular/material/button";
 import {FormsModule} from "@angular/forms";
 import {MatInput} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -30,6 +30,11 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import { ForgetPassword } from './security/pages/forget-password/forget-password';
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatCheckbox} from "@angular/material/checkbox";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatTableModule} from "@angular/material/table";
+import {MatCardModule} from "@angular/material/card";
+import {MatDivider} from "@angular/material/divider";
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
   declarations: [
@@ -63,7 +68,12 @@ import {MatCheckbox} from "@angular/material/checkbox";
     MatIcon,
     MatProgressSpinner,
     MatStepperModule,
-    MatCheckbox
+    MatSidenavModule,
+    MatTableModule,
+    MatIconButton,
+    MatCardModule,
+    MatDivider,
+    MatListModule
   ],
   providers: [
     provideHttpClient(),

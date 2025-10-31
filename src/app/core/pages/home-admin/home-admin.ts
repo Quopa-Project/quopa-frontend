@@ -1,12 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserDto} from "../../models/user.dto";
 import {UserAuxService} from "../../../shared/services/user-aux/user-aux.service";
-import {CompanyService} from "../../services/company/company.service";
 import {CompanyDto} from "../../models/company.dto";
-import {ErrorSnackBar} from "../../../shared/pages/error-snack-bar/error-snack-bar";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {ErrorMessage} from "../../../shared/models/error-message";
 
 @Component({
   selector: 'app-home-admin',
@@ -14,33 +10,15 @@ import {ErrorMessage} from "../../../shared/models/error-message";
   templateUrl: './home-admin.html',
   styleUrl: './home-admin.css'
 })
-export class HomeAdmin implements OnInit {
+export class HomeAdmin {
   @Input() role: string = '';
 
   user: UserDto;
   company: CompanyDto;
 
-  constructor(private companyService: CompanyService, private router: Router,
-              private snackBar: MatSnackBar, public userAuxService: UserAuxService) {
+  constructor(private router: Router, public userAuxService: UserAuxService) {
     this.user = userAuxService.getUser();
-    this.company = {} as CompanyDto;
-  }
-
-  ngOnInit(): void {
-    this.companyService.getObject().subscribe({
-      next: (response) => {
-        this.company = response.company;
-        this.userAuxService.setCompany(response.company);
-      },
-      error: (error: ErrorMessage) => {
-        this.snackBar.openFromComponent(ErrorSnackBar, {
-          data: {
-            messages: error.message
-          },
-          duration: 2000
-        });
-      }
-    });
+    this.company = userAuxService.getCompany();
   }
 
   signOut() {
