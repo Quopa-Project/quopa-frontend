@@ -1,12 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {CompanyDto} from "../../../core/models/company.dto";
+import {CompanyDto} from "../../models/company.dto";
 import {UserAuxService} from "../../../shared/services/user-aux/user-aux.service";
 import {BranchService} from "../../services/branch/branch.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {BranchDto} from "../../../core/models/branch.dto";
+import {BranchDto} from "../../models/branch.dto";
 import {ErrorMessage} from "../../../shared/models/error-message";
 import {ErrorSnackBar} from "../../../shared/pages/error-snack-bar/error-snack-bar";
 import {MatSidenav} from "@angular/material/sidenav";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {CreateUserBranchDialog} from "../../dialogs/create-user-branch.dialog/create-user-branch.dialog";
 
 @Component({
   selector: 'app-manage-branches',
@@ -24,10 +26,10 @@ export class ManageBranches implements OnInit {
 
   branchToEdit: BranchDto;
 
-  displayedColumns: string[] = ['address', 'branchDishes', 'extraBranches', 'actions'];
+  displayedColumns: string[] = ['name', 'address', 'actions'];
 
   constructor(private branchService: BranchService, private snackBar: MatSnackBar,
-              public userAuxService: UserAuxService) {
+              private dialog: MatDialog, public userAuxService: UserAuxService) {
     this.company = userAuxService.getCompany();
     this.branches = [];
     this.branchToEdit = {} as BranchDto;
@@ -35,6 +37,11 @@ export class ManageBranches implements OnInit {
   }
 
   ngOnInit(): void {
+    this.refreshBranches();
+  }
+
+  refreshBranches() {
+    this.dataLoaded = 0;
     this.branchService.getByCompanyId(this.company.id).subscribe({
       next: (response) => {
         this.dataLoaded = 1;
@@ -53,14 +60,35 @@ export class ManageBranches implements OnInit {
   }
 
   openCreateDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.data = {
+      createUserBranch: {
+        user: {},
+        branch: {
+          companyId: this.company.id
+        }
+      }
+    };
 
+    const dialogRef = this.dialog.open(CreateUserBranchDialog, dialogConfig);
+
+    dialogRef.afterClosed().subscribe((result: BranchDto) => {
+      if (result) {
+        this.refreshBranches();
+      }
+    });
   }
 
   onUpdateBranch(editDrawer: MatSidenav) {
-
+    this.savingBranch = true;
   }
 
-  openEditDrawer(editDrawer: MatSidenav, b: any) {
-
+  openEditDrawer(editDrawer: MatSidenav, branch: BranchDto) {
+    editDrawer.open().then();
+    this.branchToEdit = {
+      ...branch,
+      company: {...branch.company}
+    };
   }
 }

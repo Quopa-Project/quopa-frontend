@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {UserDto} from "../../../core/models/user.dto";
-import {CompanyDto} from "../../../core/models/company.dto";
+import {CompanyDto} from "../../../admin/models/company.dto";
+import {BranchDto} from "../../../admin/models/branch.dto";
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ import {CompanyDto} from "../../../core/models/company.dto";
 export class UserAuxService {
   private user: UserDto = {} as UserDto;
   private company: CompanyDto = {} as CompanyDto;
+  private branch: BranchDto = {} as BranchDto;
 
   setUser(user: UserDto) {
     this.user = user;
@@ -17,12 +19,20 @@ export class UserAuxService {
     this.company = company;
   }
 
+  setBranch(branch: BranchDto) {
+    this.branch = branch;
+  }
+
   getUser() {
     return this.user;
   }
 
   getCompany() {
     return this.company;
+  }
+
+  getBranch() {
+    return this.branch;
   }
 
   getUserRole(): string {

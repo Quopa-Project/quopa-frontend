@@ -31,20 +31,20 @@
         <router-outlet></router-outlet>
     </div>
     <div class="admin-layout-mobile" style="background: #ffffff;">
-        <div style="display: flex; width: 100%; margin: 10px 0">
-            <button matButton [routerLink]="['dashboard']" style="flex: 1">
+        <div style="display: grid; width: 100%; margin: 10px 0; grid-template-columns: 1fr 1fr 1fr;">
+            <button matButton [routerLink]="['dashboard']">
                 <div style="display: flex; flex-direction: column; align-items: center;">
                     <mat-icon>dashboard</mat-icon>
                     <span>Dashboard</span>
                 </div>
             </button>
-            <button matButton [routerLink]="['manage-branches']" style="flex: 1">
+            <button matButton [routerLink]="['manage-branches']">
                 <div style="display: flex; flex-direction: column; align-items: center;">
                     <mat-icon>store</mat-icon>
                     <span>Sucursales</span>
                 </div>
             </button>
-            <button matButton [routerLink]="['profile']" style="flex: 1">
+            <button matButton [routerLink]="['profile']">
                 <div style="display: flex; flex-direction: column; align-items: center;">
                     <mat-icon>person</mat-icon>
                     <span>Perfil</span>

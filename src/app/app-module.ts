@@ -29,12 +29,14 @@ import { VerifyAccount } from './security/pages/verify-account/verify-account';
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import { ForgetPassword } from './security/pages/forget-password/forget-password';
 import {MatStepperModule} from "@angular/material/stepper";
-import {MatCheckbox} from "@angular/material/checkbox";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatTableModule} from "@angular/material/table";
 import {MatCardModule} from "@angular/material/card";
 import {MatDivider} from "@angular/material/divider";
 import {MatListModule} from "@angular/material/list";
+import { CreateUserBranchDialog } from './admin/dialogs/create-user-branch.dialog/create-user-branch.dialog';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatTabsModule} from "@angular/material/tabs";
 
 @NgModule({
   declarations: [
@@ -54,7 +56,8 @@ import {MatListModule} from "@angular/material/list";
     DashboardBranch,
     Register,
     VerifyAccount,
-    ForgetPassword
+    ForgetPassword,
+    CreateUserBranchDialog
   ],
   imports: [
     BrowserModule,
@@ -73,7 +76,9 @@ import {MatListModule} from "@angular/material/list";
     MatIconButton,
     MatCardModule,
     MatDivider,
-    MatListModule
+    MatListModule,
+    MatDialogModule,
+    MatTabsModule
   ],
   providers: [
     provideHttpClient(),

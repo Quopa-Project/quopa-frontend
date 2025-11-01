@@ -5,4 +5,6 @@ export interface BranchDto {
   name: string;
   address: string;
   company: CompanyDto;
+
+  companyId: number;
 }

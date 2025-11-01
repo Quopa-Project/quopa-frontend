@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserDto} from "../../models/user.dto";
 import {UserAuxService} from "../../../shared/services/user-aux/user-aux.service";
-import {CompanyDto} from "../../models/company.dto";
+import {CompanyDto} from "../../../admin/models/company.dto";
 
 @Component({
   selector: 'app-home-admin',

@@ -1,0 +1,56 @@
+<div style="width: min(500px, 90vw); background-color: white;">
+    <h2 mat-dialog-title>Nuevo usuario y sucursal</h2>
+    <mat-dialog-content>
+        <mat-tab-group mat-stretch-tabs="false">
+            <mat-tab label="Usuario">
+                <div class="tab-content">
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput [(ngModel)]="data.createUserBranch.user.name">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Apellido</mat-label>
+                        <input matInput [(ngModel)]="data.createUserBranch.user.lastName">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Correo Electrónico</mat-label>
+                        <input matInput [(ngModel)]="data.createUserBranch.user.email">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput type="password" [(ngModel)]="data.createUserBranch.user.password">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Teléfono Celular</mat-label>
+                        <input matInput type="number" [(ngModel)]="data.createUserBranch.user.phoneNumber">
+                    </mat-form-field>
+                </div>
+            </mat-tab>
+            <mat-tab label="Sucursal">
+                <div class="tab-content">
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Nombre de la sucursal</mat-label>
+                        <input matInput [(ngModel)]="data.createUserBranch.branch.name"/>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Dirección de la sucursal</mat-label>
+                        <input matInput [(ngModel)]="data.createUserBranch.branch.address"/>
+                    </mat-form-field>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button mat-dialog-close [disabled]="loading">Cancelar</button>
+        <button matButton="filled" [disabled]="loading" (click)="onCreateBranchWithUser()">
+            <mat-icon>save</mat-icon>
+            <span>Crear</span>
+        </button>
+        @if (loading) {
+            <div style="margin-left: 8px">
+                <mat-progress-spinner diameter="24" mode="indeterminate"></mat-progress-spinner>
+            </div>
+        }
+    </mat-dialog-actions>
+</div>
+
