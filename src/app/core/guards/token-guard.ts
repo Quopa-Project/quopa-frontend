@@ -2,7 +2,7 @@ import {CanActivateFn, Router} from '@angular/router';
 import {inject} from "@angular/core";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {UserService} from "../services/user/user.service";
-import {catchError, forkJoin, iif, map, of} from "rxjs";
+import {catchError, iif, map, of, switchMap} from "rxjs";
 import {ErrorMessage} from "../../shared/models/error-message";
 import {ErrorSnackBar} from "../../shared/pages/error-snack-bar/error-snack-bar";
 import {UserAuxService} from "../../shared/services/user-aux/user-aux.service";
@@ -20,22 +20,25 @@ export const tokenGuard: CanActivateFn = (route) => {
   if (localStorage.getItem('token')) {
     const roleParam = route.parent?.paramMap.get('role');
 
-    return forkJoin({
-      userRes: userService.getObject(),
-      orgRes: iif(
-        () => roleParam === 'ADMIN',
-        companyService.getObject(),
-        branchService.getObject()
-      )
-    }).pipe(
-      map((response) => {
-        userAuxService.setUser(response.userRes.user);
-        if ('company' in response.orgRes) {
-          userAuxService.setCompany(response.orgRes.company);
-        } else {
-          userAuxService.setBranch(response.orgRes.branch);
-        }
-        return true;
+    return userService.getObject().pipe(
+      switchMap(response => {
+        userAuxService.setUser(response.user);
+
+        const role = roleParam ?? response.user.role;
+        return iif(
+          () => role === 'ADMIN',
+          companyService.getObject(),
+          branchService.getObject()
+        ).pipe(
+          map(response => {
+            if ('company' in response) {
+              userAuxService.setCompany(response.company);
+            } else {
+              userAuxService.setBranch(response.branch);
+            }
+            return true;
+          })
+        );
       }),
       catchError((error: ErrorMessage) => {
         localStorage.removeItem('token');

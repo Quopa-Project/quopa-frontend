@@ -82,6 +82,24 @@ export class ManageBranches implements OnInit {
 
   onUpdateBranch(editDrawer: MatSidenav) {
     this.savingBranch = true;
+    this.snackBar.open('Actualizando sede');
+    this.branchService.update(this.branchToEdit.id, this.branchToEdit).subscribe({
+      next: () => {
+        this.savingBranch = false;
+        this.snackBar.dismiss();
+        editDrawer.close().then();
+        this.refreshBranches();
+      },
+      error: (error: ErrorMessage) => {
+        this.savingBranch = false;
+        this.snackBar.openFromComponent(ErrorSnackBar, {
+          data: {
+            messages: error.message
+          },
+          duration: 2000
+        });
+      }
+    });
   }
 
   openEditDrawer(editDrawer: MatSidenav, branch: BranchDto) {

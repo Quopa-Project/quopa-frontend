@@ -37,6 +37,7 @@ import {MatListModule} from "@angular/material/list";
 import { CreateUserBranchDialog } from './admin/dialogs/create-user-branch.dialog/create-user-branch.dialog';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatTabsModule} from "@angular/material/tabs";
+import { ManageCourts } from './branch/pages/manage-courts/manage-courts';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import {MatTabsModule} from "@angular/material/tabs";
     Register,
     VerifyAccount,
     ForgetPassword,
-    CreateUserBranchDialog
+    CreateUserBranchDialog,
+    ManageCourts
   ],
   imports: [
     BrowserModule,

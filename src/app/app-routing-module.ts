@@ -8,11 +8,13 @@ import {tokenGuard} from "./core/guards/token-guard";
 import {ManageBranches} from "./admin/pages/manage-branches/manage-branches";
 import {ProfilePrincipal} from "./core/pages/profile-principal/profile-principal";
 import {DashboardPrincipal} from "./core/pages/dashboard-principal/dashboard-principal";
-import {adminRoleGuard} from "./core/guards/admin-role-guard";
+import {adminRoleGuard} from "./admin/guards/admin-role-guard";
 import {correctRoleGuard} from "./core/guards/correct-role-guard";
 import {Register} from "./security/pages/register/register";
 import {VerifyAccount} from "./security/pages/verify-account/verify-account";
 import {ForgetPassword} from "./security/pages/forget-password/forget-password";
+import {ManageCourts} from "./branch/pages/manage-courts/manage-courts";
+import {branchRoleGuard} from "./branch/guards/branch-role-guard";
 
 const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noTokenGuard] },
@@ -25,8 +27,12 @@ const routes: Routes = [
     canActivate: [tokenGuard],
     children: [
       { path: 'dashboard', component: DashboardPrincipal, canActivate: [correctRoleGuard] },
-      { path: 'manage-branches', component: ManageBranches, canActivate: [correctRoleGuard, adminRoleGuard] },
       { path: 'profile', component: ProfilePrincipal, canActivate: [correctRoleGuard] },
+
+      { path: 'manage-branches', component: ManageBranches, canActivate: [correctRoleGuard, adminRoleGuard] },
+
+      { path: 'manage-courts', component: ManageCourts, canActivate: [correctRoleGuard, branchRoleGuard] },
+
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ]
   },
