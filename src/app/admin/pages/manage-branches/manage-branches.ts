@@ -82,7 +82,7 @@ export class ManageBranches implements OnInit {
 
   onUpdateBranch(editDrawer: MatSidenav) {
     this.savingBranch = true;
-    this.snackBar.open('Actualizando sede');
+    this.snackBar.open('Actualizando sucursal');
     this.branchService.update(this.branchToEdit.id, this.branchToEdit).subscribe({
       next: () => {
         this.savingBranch = false;

@@ -1,10 +1,10 @@
-<div style="display: flex; height: 100%;">
+<div class="container">
     <div class="branch-layout-desktop" style="background: #ffffff;">
         <div style="padding: 16px; display: flex; align-items: center; gap: 12px;">
             <mat-icon style="width: 40px; height: 40px; font-size: 40px; color: #2fc332;">account_circle</mat-icon>
             <div style="display: flex; flex-direction: column;">
-                <span>{{ user.name + ' ' + user.lastName || 'Administrador' }}</span>
-                <small>{{ user.email || 'admin@empresa.com' }}</small>
+                <span>{{ branch.name || 'Sucursal' }}</span>
+                <small>{{ user.name + ' ' + user.lastName || 'Administrador' }}</small>
             </div>
         </div>
         <div style="flex: 1; padding: 8px; display: flex; flex-direction: column; gap: 8px;">
@@ -35,46 +35,41 @@
             </button>
         </div>
     </div>
-    <div class="branch-layout-mobile" style="background: #ffffff; padding: 4px;">
-        <div style="display: flex; justify-content: center;">
-            <mat-icon style="width: 40px; height: 40px; font-size: 40px; color: #2fc332;">account_circle</mat-icon>
-        </div>
-        <div style="flex: 1; display: flex; flex-direction: column; gap: 8px;">
+    <div style="flex: 1; background: #f8fafc;">
+        <router-outlet></router-outlet>
+    </div>
+    <div class="branch-layout-mobile" style="background: #ffffff;">
+        <div style="display: grid; width: 100%; margin: 10px 0; grid-template-columns: 1fr 1fr 1fr 1fr 1fr;">
             <button matButton [routerLink]="['dashboard']">
-                <div style="display: flex;">
+                <div style="display: flex; flex-direction: column; align-items: center;">
                     <mat-icon>dashboard</mat-icon>
+                    <span>Dashboard</span>
                 </div>
             </button>
             <button matButton [routerLink]="['manage-courts']">
-                <div style="display: flex;">
+                <div style="display: flex; flex-direction: column; align-items: center;">
                     <mat-icon>sports_tennis</mat-icon>
+                    <span>Canchas</span>
                 </div>
             </button>
             <button matButton [routerLink]="['bookings']">
-                <div style="display: flex;">
+                <div style="display: flex; flex-direction: column; align-items: center;">
                     <mat-icon>event</mat-icon>
+                    <span>Reservaciones</span>
                 </div>
             </button>
             <button matButton [routerLink]="['ratings']">
-                <div style="display: flex;">
+                <div style="display: flex; flex-direction: column; align-items: center;">
                     <mat-icon>grade</mat-icon>
+                    <span>Valoraciones</span>
                 </div>
             </button>
             <button matButton [routerLink]="['profile']">
-                <div style="display: flex;">
+                <div style="display: flex; flex-direction: column; align-items: center;">
                     <mat-icon>person</mat-icon>
+                    <span>Perfil</span>
                 </div>
             </button>
         </div>
-        <div>
-            <button matButton="filled" (click)="signOut()" style="background-color: #ff6464;">
-                <div style="display: flex;">
-                    <mat-icon>logout</mat-icon>
-                </div>
-            </button>
-        </div>
-    </div>
-    <div style="flex: 1; background: #f8fafc;">
-        <router-outlet></router-outlet>
     </div>
 </div>

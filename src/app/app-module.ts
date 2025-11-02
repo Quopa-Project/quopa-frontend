@@ -38,6 +38,8 @@ import { CreateUserBranchDialog } from './admin/dialogs/create-user-branch.dialo
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatTabsModule} from "@angular/material/tabs";
 import { ManageCourts } from './branch/pages/manage-courts/manage-courts';
+import { CreateCourtDialog } from './branch/dialogs/create-court.dialog/create-court.dialog';
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -59,7 +61,8 @@ import { ManageCourts } from './branch/pages/manage-courts/manage-courts';
     VerifyAccount,
     ForgetPassword,
     CreateUserBranchDialog,
-    ManageCourts
+    ManageCourts,
+    CreateCourtDialog
   ],
   imports: [
     BrowserModule,
@@ -80,7 +83,8 @@ import { ManageCourts } from './branch/pages/manage-courts/manage-courts';
     MatDivider,
     MatListModule,
     MatDialogModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSelectModule
   ],
   providers: [
     provideHttpClient(),
