@@ -8,6 +8,7 @@ import {CompanyService} from "../../services/company/company.service";
 import {ErrorSnackBar} from "../../../shared/pages/error-snack-bar/error-snack-bar";
 import {ErrorMessage} from "../../../shared/models/error-message";
 import {Router} from "@angular/router";
+import {CommunicationService} from "../../../shared/services/communicacion/communication.service";
 
 @Component({
   selector: 'app-profile-admin',
@@ -27,8 +28,8 @@ export class ProfileAdmin {
   companyToUpdate: CompanyDto;
 
   constructor(private userService: UserService, private companyService: CompanyService,
-              private userAuxService: UserAuxService, private snackBar: MatSnackBar,
-              private router: Router) {
+              private userAuxService: UserAuxService, private communicationService: CommunicationService,
+              private snackBar: MatSnackBar, private router: Router) {
     this.user = this.userAuxService.getUser();
     this.userToUpdate = {...this.user};
     this.company = this.userAuxService.getCompany();
@@ -43,6 +44,7 @@ export class ProfileAdmin {
         this.savingUser = false;
         this.snackBar.dismiss();
         this.userAuxService.setUser(response.user);
+        this.communicationService.emitUserInfoChange({ infoChanged: "User" });
       },
       error: (error: ErrorMessage) => {
         this.savingUser = false;
@@ -64,6 +66,7 @@ export class ProfileAdmin {
         this.savingCompany = false;
         this.snackBar.dismiss();
         this.userAuxService.setCompany(response.company);
+        this.communicationService.emitUserInfoChange({ infoChanged: "Company" });
       },
       error: (error: ErrorMessage) => {
         this.savingCompany = false;

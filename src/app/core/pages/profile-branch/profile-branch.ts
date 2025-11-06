@@ -8,6 +8,7 @@ import {BranchService} from "../../../admin/services/branch/branch.service";
 import {ErrorMessage} from "../../../shared/models/error-message";
 import {ErrorSnackBar} from "../../../shared/pages/error-snack-bar/error-snack-bar";
 import {Router} from "@angular/router";
+import {CommunicationService} from "../../../shared/services/communicacion/communication.service";
 
 @Component({
   selector: 'app-profile-branch',
@@ -27,8 +28,8 @@ export class ProfileBranch {
   branchToUpdate: BranchDto;
 
   constructor(private userService: UserService, private branchService: BranchService,
-              private userAuxService: UserAuxService, private snackBar: MatSnackBar,
-              private router: Router) {
+              private userAuxService: UserAuxService, private communicationService: CommunicationService,
+              private snackBar: MatSnackBar, private router: Router) {
     this.user = this.userAuxService.getUser();
     this.userToUpdate = {...this.user};
     this.branch = this.userAuxService.getBranch();
@@ -43,6 +44,7 @@ export class ProfileBranch {
         this.savingUser = false;
         this.snackBar.dismiss();
         this.userAuxService.setUser(response.user);
+        this.communicationService.emitUserInfoChange({ infoChanged: "User" });
       },
       error: (error: ErrorMessage) => {
         this.savingUser = false;
@@ -63,7 +65,8 @@ export class ProfileBranch {
       next: (response) => {
         this.savingBranch = false;
         this.snackBar.dismiss();
-        this.userAuxService.setCompany(response.branch);
+        this.userAuxService.setBranch(response.branch);
+        this.communicationService.emitUserInfoChange({ infoChanged: "Branch" });
       },
       error: (error: ErrorMessage) => {
         this.savingBranch = false;
