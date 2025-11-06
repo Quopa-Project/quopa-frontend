@@ -7,6 +7,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {BranchService} from "../../../admin/services/branch/branch.service";
 import {ErrorMessage} from "../../../shared/models/error-message";
 import {ErrorSnackBar} from "../../../shared/pages/error-snack-bar/error-snack-bar";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-profile-branch',
@@ -26,7 +27,8 @@ export class ProfileBranch {
   branchToUpdate: BranchDto;
 
   constructor(private userService: UserService, private branchService: BranchService,
-              private userAuxService: UserAuxService, private snackBar: MatSnackBar) {
+              private userAuxService: UserAuxService, private snackBar: MatSnackBar,
+              private router: Router) {
     this.user = this.userAuxService.getUser();
     this.userToUpdate = {...this.user};
     this.branch = this.userAuxService.getBranch();
@@ -73,5 +75,10 @@ export class ProfileBranch {
         });
       }
     });
+  }
+
+  signOut() {
+    localStorage.clear();
+    this.router.navigate(['/login']).then();
   }
 }

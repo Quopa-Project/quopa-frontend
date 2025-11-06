@@ -7,6 +7,7 @@ import {UserService} from "../../services/user/user.service";
 import {CompanyService} from "../../services/company/company.service";
 import {ErrorSnackBar} from "../../../shared/pages/error-snack-bar/error-snack-bar";
 import {ErrorMessage} from "../../../shared/models/error-message";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-profile-admin',
@@ -26,7 +27,8 @@ export class ProfileAdmin {
   companyToUpdate: CompanyDto;
 
   constructor(private userService: UserService, private companyService: CompanyService,
-              private userAuxService: UserAuxService, private snackBar: MatSnackBar) {
+              private userAuxService: UserAuxService, private snackBar: MatSnackBar,
+              private router: Router) {
     this.user = this.userAuxService.getUser();
     this.userToUpdate = {...this.user};
     this.company = this.userAuxService.getCompany();
@@ -73,5 +75,10 @@ export class ProfileAdmin {
         });
       }
     });
+  }
+
+  signOut() {
+    localStorage.clear();
+    this.router.navigate(['/login']).then();
   }
 }

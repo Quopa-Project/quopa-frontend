@@ -8,9 +8,18 @@ mat-card {
     gap: 10px;
     margin: 10px;
 }
+.sign-out-container {
+    display: none;
+}
 
-@media (max-width: 800px) {
+@media (max-width: 767px) {
     .tab-content {
         grid-template-columns: 1fr;
+    }
+    .sign-out-container {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 20px;
     }
 }
