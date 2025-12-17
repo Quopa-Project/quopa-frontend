@@ -45,6 +45,8 @@ import { HomeSuperadmin } from './core/pages/home-superadmin/home-superadmin';
 import { DashboardSuperadmin } from './core/pages/dashboard-superadmin/dashboard-superadmin';
 import { ManageCompanies } from './superadmin/pages/manage-companies/manage-companies';
 import { CreateUserCompanyDialog } from './superadmin/dialogs/create-user-company.dialog/create-user-company.dialog';
+import { ManageSports } from './superadmin/pages/manage-sports/manage-sports';
+import { CreateSportDialog } from './superadmin/dialogs/create-sport.dialog/create-sport.dialog';
 
 @NgModule({
   declarations: [
@@ -71,7 +73,9 @@ import { CreateUserCompanyDialog } from './superadmin/dialogs/create-user-compan
     HomeSuperadmin,
     DashboardSuperadmin,
     ManageCompanies,
-    CreateUserCompanyDialog
+    CreateUserCompanyDialog,
+    ManageSports,
+    CreateSportDialog
   ],
   imports: [
     BrowserModule,

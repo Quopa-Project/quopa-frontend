@@ -65,6 +65,6 @@ export class CreateCourtDialog implements OnInit {
           duration: 2000
         });
       }
-    })
+    });
   }
 }

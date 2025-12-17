@@ -16,6 +16,10 @@
                 <mat-icon>sports_tennis</mat-icon>
                 <span>Compañías</span>
             </button>
+            <button matButton style="justify-content: flex-start" [routerLink]="['manage-sports']">
+                <mat-icon>sports_tennis</mat-icon>
+                <span>Deportes</span>
+            </button>
         </div>
         <div style="padding: 12px;">
             <button matButton="filled" (click)="signOut()" style="background-color: #ff6464; width: 100%;">
@@ -37,7 +41,13 @@
             <button matButton [routerLink]="['manage-companies']">
                 <div style="display: flex; flex-direction: column; align-items: center;">
                     <mat-icon>sports_tennis</mat-icon>
-                    <span>Canchas</span>
+                    <span>Compañías</span>
+                </div>
+            </button>
+            <button matButton [routerLink]="['manage-sports']">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <mat-icon>sports_tennis</mat-icon>
+                    <span>Deportes</span>
                 </div>
             </button>
         </div>
