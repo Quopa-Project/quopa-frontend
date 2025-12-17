@@ -15,6 +15,8 @@ import {VerifyAccount} from "./security/pages/verify-account/verify-account";
 import {ForgetPassword} from "./security/pages/forget-password/forget-password";
 import {ManageCourts} from "./branch/pages/manage-courts/manage-courts";
 import {branchRoleGuard} from "./branch/guards/branch-role-guard";
+import {ManageCompanies} from "./superadmin/pages/manage-companies/manage-companies";
+import {superadminRoleGuard} from "./superadmin/guards/superadmin-role-guard";
 
 const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noTokenGuard] },
@@ -28,6 +30,8 @@ const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardPrincipal, canActivate: [correctRoleGuard] },
       { path: 'profile', component: ProfilePrincipal, canActivate: [correctRoleGuard] },
+
+      { path: 'manage-companies', component: ManageCompanies, canActivate: [correctRoleGuard, superadminRoleGuard] },
 
       { path: 'manage-branches', component: ManageBranches, canActivate: [correctRoleGuard, adminRoleGuard] },
 

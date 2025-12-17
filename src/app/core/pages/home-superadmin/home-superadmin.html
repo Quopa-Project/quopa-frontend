@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="superadmin-layout-desktop" style="background: #ffffff;">
+        <div style="padding: 16px; display: flex; align-items: center; gap: 12px;">
+            <mat-icon style="width: 40px; height: 40px; font-size: 40px; color: #2fc332;">account_circle</mat-icon>
+            <div style="display: flex; flex-direction: column;">
+                <span>Super Admin</span>
+                <small>{{ user.name + ' ' + user.lastName || 'Administrador' }}</small>
+            </div>
+        </div>
+        <div style="flex: 1; padding: 8px; display: flex; flex-direction: column; gap: 8px;">
+            <button matButton style="justify-content: flex-start" [routerLink]="['dashboard']">
+                <mat-icon>dashboard</mat-icon>
+                <span>Dashboard</span>
+            </button>
+            <button matButton style="justify-content: flex-start" [routerLink]="['manage-companies']">
+                <mat-icon>sports_tennis</mat-icon>
+                <span>Compañías</span>
+            </button>
+        </div>
+        <div style="padding: 12px;">
+            <button matButton="filled" (click)="signOut()" style="background-color: #ff6464; width: 100%;">
+                Cerrar sesión
+            </button>
+        </div>
+    </div>
+    <div style="flex: 1; background: #f8fafc;">
+        <router-outlet></router-outlet>
+    </div>
+    <div class="superadmin-layout-mobile" style="background: #ffffff;">
+        <div style="display: flex; width: 100%; margin: 10px 0;">
+            <button matButton [routerLink]="['dashboard']">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <mat-icon>dashboard</mat-icon>
+                    <span>Dashboard</span>
+                </div>
+            </button>
+            <button matButton [routerLink]="['manage-companies']">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <mat-icon>sports_tennis</mat-icon>
+                    <span>Canchas</span>
+                </div>
+            </button>
+        </div>
+    </div>
+</div>

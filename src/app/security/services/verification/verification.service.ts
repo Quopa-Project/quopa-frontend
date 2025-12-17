@@ -4,7 +4,6 @@ import {VerificationApiResponse} from "../../models/api-responses/verification-a
 import {HttpClient} from "@angular/common/http";
 import {VerificationDto} from "../../models/verification.dto";
 import {catchError, Observable} from "rxjs";
-import {ValidationTokenApiResponse} from "../../models/api-responses/validation-token-api-response";
 
 @Injectable({
   providedIn: 'root'

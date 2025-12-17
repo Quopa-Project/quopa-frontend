@@ -40,6 +40,11 @@ import {MatTabsModule} from "@angular/material/tabs";
 import { ManageCourts } from './branch/pages/manage-courts/manage-courts';
 import { CreateCourtDialog } from './branch/dialogs/create-court.dialog/create-court.dialog';
 import {MatSelectModule} from "@angular/material/select";
+import {MatCheckbox} from "@angular/material/checkbox";
+import { HomeSuperadmin } from './core/pages/home-superadmin/home-superadmin';
+import { DashboardSuperadmin } from './core/pages/dashboard-superadmin/dashboard-superadmin';
+import { ManageCompanies } from './superadmin/pages/manage-companies/manage-companies';
+import { CreateUserCompanyDialog } from './superadmin/dialogs/create-user-company.dialog/create-user-company.dialog';
 
 @NgModule({
   declarations: [
@@ -62,7 +67,11 @@ import {MatSelectModule} from "@angular/material/select";
     ForgetPassword,
     CreateUserBranchDialog,
     ManageCourts,
-    CreateCourtDialog
+    CreateCourtDialog,
+    HomeSuperadmin,
+    DashboardSuperadmin,
+    ManageCompanies,
+    CreateUserCompanyDialog
   ],
   imports: [
     BrowserModule,
@@ -84,7 +93,8 @@ import {MatSelectModule} from "@angular/material/select";
     MatListModule,
     MatDialogModule,
     MatTabsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckbox
   ],
   providers: [
     provideHttpClient(),

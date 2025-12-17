@@ -1,5 +1,8 @@
 <div style="height: 100%;">
     @switch (role) {
+        @case ('SUPER_ADMIN') {
+            <app-dashboard-superadmin [role]="role"></app-dashboard-superadmin>
+        }
         @case ('ADMIN') {
             <app-dashboard-admin [role]="role"></app-dashboard-admin>
         }

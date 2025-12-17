@@ -4,6 +4,7 @@ import {RegisterService} from "../../services/register/register.service";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ErrorSnackBar} from "../../../shared/pages/error-snack-bar/error-snack-bar";
+import {ErrorMessage} from "../../../shared/models/error-message";
 
 @Component({
   selector: 'app-register',
@@ -28,7 +29,7 @@ export class Register {
         this.snackBar.dismiss();
         this.router.navigate(['/login']).then();
       },
-      error: (error) => {
+      error: (error: ErrorMessage) => {
         this.loading = false;
         this.snackBar.openFromComponent(ErrorSnackBar, {
           data: {
