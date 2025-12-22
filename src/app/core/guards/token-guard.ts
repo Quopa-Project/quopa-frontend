@@ -2,7 +2,7 @@ import {CanActivateFn, Router} from '@angular/router';
 import {inject} from "@angular/core";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {UserService} from "../services/user/user.service";
-import {catchError, iif, map, of, switchMap} from "rxjs";
+import {catchError, map, of, switchMap} from "rxjs";
 import {ErrorMessage} from "../../shared/models/error-message";
 import {ErrorSnackBar} from "../../shared/pages/error-snack-bar/error-snack-bar";
 import {UserAuxService} from "../../shared/services/user-aux/user-aux.service";
@@ -25,20 +25,24 @@ export const tokenGuard: CanActivateFn = (route) => {
         userAuxService.setUser(response.user);
 
         const role = roleParam ?? response.user.role;
-        return iif(
-          () => role === 'ADMIN',
-          companyService.getObject(),
-          branchService.getObject()
-        ).pipe(
-          map(response => {
-            if ('company' in response) {
-              userAuxService.setCompany(response.company);
-            } else {
-              userAuxService.setBranch(response.branch);
-            }
-            return true;
-          })
-        );
+
+        if (role === 'ADMIN') {
+          return companyService.getObject().pipe(
+            map(companyResponse => {
+              userAuxService.setCompany(companyResponse.company);
+              return true;
+            })
+          );
+        } else if (role === 'BRANCH') {
+          return branchService.getObject().pipe(
+            map(branchResponse => {
+              userAuxService.setBranch(branchResponse.branch);
+              return true;
+            })
+          );
+        } else {
+          return of(true);
+        }
       }),
       catchError((error: ErrorMessage) => {
         localStorage.removeItem('token');
