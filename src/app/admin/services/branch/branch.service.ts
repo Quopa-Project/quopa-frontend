@@ -32,6 +32,14 @@ export class BranchService extends BaseService<BranchApiResponse> {
     }).pipe(catchError(this.handleError));
   }
 
+  getById(id: number): Observable<BranchApiResponse> {
+    return this.http.get<BranchApiResponse>(`${this.basePath}/${id}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).pipe(catchError(this.handleError));
+  }
+
   update(id: number, body: BranchDto): Observable<BranchApiResponse> {
     return this.http.put<BranchApiResponse>(`${this.basePath}/${id}`, body, {
       headers: {
