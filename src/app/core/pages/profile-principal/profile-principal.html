@@ -1,10 +1,16 @@
 <div style="height: 100%;">
     @switch (role) {
+        @case ('SUPER_ADMIN') {
+            <app-profile-superadmin [role]="role"></app-profile-superadmin>
+        }
         @case ('ADMIN') {
             <app-profile-admin [role]="role"></app-profile-admin>
         }
         @case ('BRANCH') {
             <app-profile-branch [role]="role"></app-profile-branch>
+        }
+        @case ('CLIENT') {
+            <app-profile-client [role]="role"></app-profile-client>
         }
         @default {
             <app-page-not-found [injected]="true"></app-page-not-found>

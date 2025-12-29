@@ -1,10 +1,10 @@
 <div class="container">
-    <div class="superadmin-layout-desktop" style="background: #ffffff;">
+    <div class="client-layout-desktop" style="background: #ffffff;">
         <div style="padding: 16px; display: flex; align-items: center; gap: 12px;">
             <mat-icon style="width: 40px; height: 40px; font-size: 40px; color: #2fc332;">account_circle</mat-icon>
             <div style="display: flex; flex-direction: column;">
-                <span>Super Admin</span>
-                <small>{{ user.name + ' ' + user.lastName || 'Administrador' }}</small>
+                <span>Cliente</span>
+                <small>{{ user.name + ' ' + user.lastName || 'Cliente' }}</small>
             </div>
         </div>
         <div style="flex: 1; padding: 8px; display: flex; flex-direction: column; gap: 8px;">
@@ -12,13 +12,17 @@
                 <mat-icon>dashboard</mat-icon>
                 <span>Dashboard</span>
             </button>
-            <button matButton style="justify-content: flex-start" [routerLink]="['manage-companies']">
-                <mat-icon>business</mat-icon>
-                <span>Compañías</span>
+            <button matButton style="justify-content: flex-start" [routerLink]="['search-courts']">
+                <mat-icon>travel_explore</mat-icon>
+                <span>Canchas</span>
             </button>
-            <button matButton style="justify-content: flex-start" [routerLink]="['manage-sports']">
-                <mat-icon>fitness_center</mat-icon>
-                <span>Deportes</span>
+            <button matButton style="justify-content: flex-start" [routerLink]="['bookings']">
+                <mat-icon>event</mat-icon>
+                <span>Reservas</span>
+            </button>
+            <button matButton style="justify-content: flex-start" [routerLink]="['ratings']">
+                <mat-icon>grade</mat-icon>
+                <span>Reseñas</span>
             </button>
             <button matButton style="justify-content: flex-start" [routerLink]="['profile']">
                 <mat-icon>person</mat-icon>
@@ -34,8 +38,8 @@
     <div style="flex: 1; background: #f8fafc;">
         <router-outlet></router-outlet>
     </div>
-    <div class="superadmin-layout-mobile" style="background: #ffffff;">
-        <div style="display: grid; width: 100%; margin: 10px 0; grid-template-columns: 1fr 1fr 1fr 1fr;">
+    <div class="client-layout-mobile" style="background: #ffffff;">
+        <div style="display: flex; width: 100%; margin: 10px 0;">
             <button matButton [routerLink]="['dashboard']">
                 <div style="display: flex; flex-direction: column; align-items: center;">
                     <mat-icon>dashboard</mat-icon>
@@ -44,14 +48,20 @@
             </button>
             <button matButton [routerLink]="['manage-companies']">
                 <div style="display: flex; flex-direction: column; align-items: center;">
-                    <mat-icon>business</mat-icon>
-                    <span>Compañías</span>
+                    <mat-icon>travel_explore</mat-icon>
+                    <span>Canchas</span>
                 </div>
             </button>
-            <button matButton [routerLink]="['manage-sports']">
+            <button matButton [routerLink]="['bookings']">
                 <div style="display: flex; flex-direction: column; align-items: center;">
-                    <mat-icon>fitness_center</mat-icon>
-                    <span>Deportes</span>
+                    <mat-icon>event</mat-icon>
+                    <span>Reservas</span>
+                </div>
+            </button>
+            <button matButton [routerLink]="['ratings']">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <mat-icon>grade</mat-icon>
+                    <span>Reseñas</span>
                 </div>
             </button>
             <button matButton [routerLink]="['profile']">

@@ -6,12 +6,12 @@ import {Subscription} from "rxjs";
 import {CommunicationService} from "../../../shared/services/communicacion/communication.service";
 
 @Component({
-  selector: 'app-home-superadmin',
+  selector: 'app-home-client',
   standalone: false,
-  templateUrl: './home-superadmin.html',
-  styleUrl: './home-superadmin.css'
+  templateUrl: './home-client.html',
+  styleUrl: './home-client.css'
 })
-export class HomeSuperadmin {
+export class HomeClient {
   @Input() role: string = '';
 
   user: UserDto;

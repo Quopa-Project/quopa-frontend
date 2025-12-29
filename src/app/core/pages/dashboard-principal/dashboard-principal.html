@@ -9,6 +9,9 @@
         @case ('BRANCH') {
             <app-dashboard-branch [role]="role"></app-dashboard-branch>
         }
+        @case ('CLIENT') {
+            <app-dashboard-client [role]="role"></app-dashboard-client>
+        }
         @default {
             <app-page-not-found [injected]="true"></app-page-not-found>
         }

@@ -18,6 +18,7 @@ import {branchRoleGuard} from "./branch/guards/branch-role-guard";
 import {ManageCompanies} from "./superadmin/pages/manage-companies/manage-companies";
 import {superadminRoleGuard} from "./superadmin/guards/superadmin-role-guard";
 import {ManageSports} from "./superadmin/pages/manage-sports/manage-sports";
+import {BranchDetail} from "./admin/pages/branch-detail/branch-detail";
 
 const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noTokenGuard] },
@@ -36,6 +37,7 @@ const routes: Routes = [
       { path: 'manage-sports', component: ManageSports, canActivate: [correctRoleGuard, superadminRoleGuard] },
 
       { path: 'manage-branches', component: ManageBranches, canActivate: [correctRoleGuard, adminRoleGuard] },
+      { path: 'branch-detail/:id', component: BranchDetail, canActivate: [correctRoleGuard, adminRoleGuard] },
 
       { path: 'manage-courts', component: ManageCourts, canActivate: [correctRoleGuard, branchRoleGuard] },
 

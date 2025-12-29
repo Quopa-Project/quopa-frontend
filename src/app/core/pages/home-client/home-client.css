@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    height: 100%;
+}
+.client-layout-desktop {
+    display: flex;
+    flex-direction: column;
+}
+.client-layout-mobile {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .container {
+        flex-direction: column;
+    }
+    .client-layout-desktop {
+        display: none;
+    }
+    .client-layout-mobile {
+        display: flex;
+    }
+}

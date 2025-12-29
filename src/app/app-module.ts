@@ -47,6 +47,11 @@ import { ManageCompanies } from './superadmin/pages/manage-companies/manage-comp
 import { CreateUserCompanyDialog } from './superadmin/dialogs/create-user-company.dialog/create-user-company.dialog';
 import { ManageSports } from './superadmin/pages/manage-sports/manage-sports';
 import { CreateSportDialog } from './superadmin/dialogs/create-sport.dialog/create-sport.dialog';
+import { HomeClient } from './core/pages/home-client/home-client';
+import { DashboardClient } from './core/pages/dashboard-client/dashboard-client';
+import { ProfileClient } from './core/pages/profile-client/profile-client';
+import { ProfileSuperadmin } from './core/pages/profile-superadmin/profile-superadmin';
+import { BranchDetail } from './admin/pages/branch-detail/branch-detail';
 
 @NgModule({
   declarations: [
@@ -75,7 +80,12 @@ import { CreateSportDialog } from './superadmin/dialogs/create-sport.dialog/crea
     ManageCompanies,
     CreateUserCompanyDialog,
     ManageSports,
-    CreateSportDialog
+    CreateSportDialog,
+    HomeClient,
+    DashboardClient,
+    ProfileClient,
+    ProfileSuperadmin,
+    BranchDetail
   ],
   imports: [
     BrowserModule,
