@@ -52,6 +52,9 @@ import { DashboardClient } from './core/pages/dashboard-client/dashboard-client'
 import { ProfileClient } from './core/pages/profile-client/profile-client';
 import { ProfileSuperadmin } from './core/pages/profile-superadmin/profile-superadmin';
 import { BranchDetail } from './admin/pages/branch-detail/branch-detail';
+import { FindCourts } from './client/pages/find-courts/find-courts';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MAT_DATE_LOCALE, provideNativeDateAdapter} from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -85,7 +88,8 @@ import { BranchDetail } from './admin/pages/branch-detail/branch-detail';
     DashboardClient,
     ProfileClient,
     ProfileSuperadmin,
-    BranchDetail
+    BranchDetail,
+    FindCourts
   ],
   imports: [
     BrowserModule,
@@ -108,11 +112,14 @@ import { BranchDetail } from './admin/pages/branch-detail/branch-detail';
     MatDialogModule,
     MatTabsModule,
     MatSelectModule,
-    MatCheckbox
+    MatCheckbox,
+    MatDatepickerModule
   ],
   providers: [
     provideHttpClient(),
-    provideBrowserGlobalErrorListeners()
+    provideBrowserGlobalErrorListeners(),
+    provideNativeDateAdapter(),
+    { provide: MAT_DATE_LOCALE, useValue: 'es-PE'}
   ],
   bootstrap: [App]
 })

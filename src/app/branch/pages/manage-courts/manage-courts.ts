@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {BranchDto} from "../../../admin/models/branch.dto";
 import {CourtDto} from "../../models/court.dto";
 import {CourtService} from "../../services/court/court.service";
@@ -17,6 +17,8 @@ import {CreateCourtDialog} from "../../dialogs/create-court.dialog/create-court.
   styleUrl: './manage-courts.css'
 })
 export class ManageCourts implements OnInit {
+  @Input() injected: boolean = false;
+
   dataLoaded: number = 0;
   savingCourt: boolean = false;
 
@@ -37,6 +39,9 @@ export class ManageCourts implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.injected) {
+      this.branch = this.userAuxService.getBranchDetail();
+    }
     this.refreshCourts();
   }
 

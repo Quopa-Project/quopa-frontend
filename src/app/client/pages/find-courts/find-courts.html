@@ -1,0 +1,53 @@
+<div style="display: flex; flex-direction: column;">
+    <mat-card class="filters-row">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-label>¿Qué deporte buscas?</mat-label>
+            <mat-icon matPrefix>sports_tennis</mat-icon>
+            <mat-select>
+                <mat-option value="tennis">Tenis</mat-option>
+                <mat-option value="soccer">Fútbol</mat-option>
+                <mat-option value="padel">Pádel</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button mat-flat-button color="primary" style="height: 48px; padding: 0 24px;">
+            <mat-icon>search</mat-icon>
+            <span>Buscar</span>
+        </button>
+    </mat-card>
+    <div class="courts-grid">
+        @for (court of [1,2,3,4,5,6]; track $index) {
+            <mat-card class="court-card">
+                <img mat-card-image src="https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?q=80&w=500" alt="Cancha" style="height: 180px; object-fit: cover; border-radius: 12px 12px 0 0;">
+
+                <mat-card-content style="padding: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <h3 style="margin: 0; font-weight: 600;">Cancha Central Padel</h3>
+                            <small style="color: #666; display: flex; align-items: center; gap: 4px;">
+                                <mat-icon style="font-size: 14px; width: 14px; height: 14px;">location_on</mat-icon>
+                                Club Deportivo Norte
+                            </small>
+                        </div>
+                        <span class="badge-status" style="background: #e8f5e9; color: #2e7d32;">Disponible</span>
+                    </div>
+
+                    <div style="margin-top: 16px; display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; flex-direction: column;">
+                            <span style="font-size: 18px; font-weight: bold; color: #2fc332;">$25.00</span>
+                            <small style="color: #999;">por hora</small>
+                        </div>
+                        <button mat-stroked-button color="primary">
+                            Ver horarios
+                        </button>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        }
+    </div>
+    @if ([].length === 0) {
+        <div style="display: flex; flex-direction: column; align-items: center; padding: 40px; color: #666;">
+            <mat-icon style="font-size: 64px; width: 64px; height: 64px; margin-bottom: 16px;">travel_explore</mat-icon>
+            <p>No encontramos canchas con esos filtros. ¡Prueba otra fecha!</p>
+        </div>
+    }
+</div>

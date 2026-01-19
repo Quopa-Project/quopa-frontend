@@ -20,6 +20,8 @@ import {superadminRoleGuard} from "./superadmin/guards/superadmin-role-guard";
 import {ManageSports} from "./superadmin/pages/manage-sports/manage-sports";
 import {BranchDetail} from "./admin/pages/branch-detail/branch-detail";
 import {branchIdExistsGuard} from "./admin/guards/branch-id-exists-guard";
+import {clientRoleGuard} from "./client/guards/client-role-guard";
+import {FindCourts} from "./client/pages/find-courts/find-courts";
 
 const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noTokenGuard] },
@@ -33,14 +35,16 @@ const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardPrincipal, canActivate: [correctRoleGuard] },
       { path: 'profile', component: ProfilePrincipal, canActivate: [correctRoleGuard] },
-
+      //Superadmin
       { path: 'manage-companies', component: ManageCompanies, canActivate: [correctRoleGuard, superadminRoleGuard] },
       { path: 'manage-sports', component: ManageSports, canActivate: [correctRoleGuard, superadminRoleGuard] },
-
+      //Admin
       { path: 'manage-branches', component: ManageBranches, canActivate: [correctRoleGuard, adminRoleGuard] },
       { path: 'branch-detail/:id', component: BranchDetail, canActivate: [correctRoleGuard, adminRoleGuard, branchIdExistsGuard] },
-
+      //Branch
       { path: 'manage-courts', component: ManageCourts, canActivate: [correctRoleGuard, branchRoleGuard] },
+      //Client
+      { path: 'find-courts', component: FindCourts, canActivate: [correctRoleGuard, clientRoleGuard] },
 
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ]

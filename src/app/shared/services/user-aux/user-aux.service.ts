@@ -10,6 +10,7 @@ export class UserAuxService {
   private user: UserDto = {} as UserDto;
   private company: CompanyDto = {} as CompanyDto;
   private branch: BranchDto = {} as BranchDto;
+  private branchDetail: BranchDto = {} as BranchDto;
 
   setUser(user: UserDto) {
     this.user = user;
@@ -23,6 +24,10 @@ export class UserAuxService {
     this.branch = branch;
   }
 
+  setBranchDetail(branchDetail: BranchDto) {
+    this.branchDetail = branchDetail;
+  }
+
   getUser() {
     return this.user;
   }
@@ -33,6 +38,10 @@ export class UserAuxService {
 
   getBranch() {
     return this.branch;
+  }
+
+  getBranchDetail() {
+    return this.branchDetail;
   }
 
   getUserRole(): string {

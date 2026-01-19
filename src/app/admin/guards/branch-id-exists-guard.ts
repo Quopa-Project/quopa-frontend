@@ -21,6 +21,7 @@ export const branchIdExistsGuard: CanActivateFn = (route) => {
   return branchService.getById(Number(branchIdParam)).pipe(
     map(response => {
       if (response.branch.company.id === userCompanyId) {
+        userAuxService.setBranchDetail(response.branch);
         return true;
       } else {
         return router.createUrlTree(['/home', role]);
