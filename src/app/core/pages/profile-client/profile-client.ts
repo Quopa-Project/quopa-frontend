@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
 import {UserDto} from "../../models/user.dto";
 import {UserService} from "../../services/user/user.service";
 import {UserAuxService} from "../../../shared/services/user-aux/user-aux.service";
@@ -15,8 +15,6 @@ import {ErrorSnackBar} from "../../../shared/pages/error-snack-bar/error-snack-b
   styleUrl: './profile-client.css'
 })
 export class ProfileClient {
-  @Input() role: string = '';
-
   savingUser: boolean = false;
 
   user: UserDto;
@@ -37,6 +35,8 @@ export class ProfileClient {
         this.savingUser = false;
         this.snackBar.dismiss();
         this.userAuxService.setUser(response.user);
+        this.user = this.userAuxService.getUser();
+        this.userToUpdate = {...this.user};
         this.communicationService.emitUserInfoChange({ infoChanged: "User" });
       },
       error: (error: ErrorMessage) => {

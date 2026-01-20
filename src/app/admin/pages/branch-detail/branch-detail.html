@@ -6,8 +6,14 @@
         </button>
     </div>
     <mat-tab-group style="margin: 0 10px">
+        <mat-tab label="Dashboard">
+            <app-dashboard-branch></app-dashboard-branch>
+        </mat-tab>
         <mat-tab label="Canchas">
             <app-manage-courts [injected]="true"></app-manage-courts>
+        </mat-tab>
+        <mat-tab label="Perfil">
+            <app-profile-branch [injected]="true"></app-profile-branch>
         </mat-tab>
     </mat-tab-group>
 </div>

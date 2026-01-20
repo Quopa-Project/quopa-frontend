@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
 import {UserAuxService} from "../../../shared/services/user-aux/user-aux.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {UserDto} from "../../models/user.dto";
@@ -17,8 +17,6 @@ import {CommunicationService} from "../../../shared/services/communicacion/commu
   styleUrl: './profile-admin.css'
 })
 export class ProfileAdmin {
-  @Input() role: string = '';
-
   savingUser: boolean = false;
   savingCompany: boolean = false;
 
@@ -44,6 +42,8 @@ export class ProfileAdmin {
         this.savingUser = false;
         this.snackBar.dismiss();
         this.userAuxService.setUser(response.user);
+        this.user = this.userAuxService.getUser();
+        this.userToUpdate = {...this.user};
         this.communicationService.emitUserInfoChange({ infoChanged: "User" });
       },
       error: (error: ErrorMessage) => {
@@ -66,6 +66,8 @@ export class ProfileAdmin {
         this.savingCompany = false;
         this.snackBar.dismiss();
         this.userAuxService.setCompany(response.company);
+        this.company = this.userAuxService.getCompany();
+        this.companyToUpdate = {...this.company};
         this.communicationService.emitUserInfoChange({ infoChanged: "Company" });
       },
       error: (error: ErrorMessage) => {

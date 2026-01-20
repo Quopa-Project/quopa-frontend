@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-dashboard-branch',
@@ -7,5 +7,4 @@ import {Component, Input} from '@angular/core';
   styleUrl: './dashboard-branch.css'
 })
 export class DashboardBranch {
-  @Input() role: string = '';
 }

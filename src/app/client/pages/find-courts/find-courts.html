@@ -13,6 +13,10 @@
             <mat-icon>search</mat-icon>
             <span>Buscar</span>
         </button>
+        <button matButton="outlined" [routerLink]="['../open-reservations']">
+            <mat-icon>group</mat-icon>
+            <span>Unirse a partida</span>
+        </button>
     </mat-card>
     @if (dataLoaded === 1) {
         <div class="courts-grid">
@@ -39,7 +43,7 @@
                                     <span style="font-size: 18px; font-weight: bold; color: #2fc332;">$ {{ court.price }}</span>
                                     <small>por hora</small>
                                 </div>
-                                <button matButton="filled" [routerLink]="['../schedule', 1]">
+                                <button matButton="filled" [routerLink]="['../book-court', 1]">
                                     Ver horarios
                                 </button>
                             </div>

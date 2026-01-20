@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-dashboard-admin',
@@ -7,5 +7,4 @@ import {Component, Input} from '@angular/core';
   styleUrl: './dashboard-admin.css'
 })
 export class DashboardAdmin {
-  @Input() role: string = '';
 }

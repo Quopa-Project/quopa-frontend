@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {UserDto} from "../../models/user.dto";
 import {BranchDto} from "../../../admin/models/branch.dto";
 import {UserService} from "../../services/user/user.service";
@@ -16,8 +16,8 @@ import {CommunicationService} from "../../../shared/services/communicacion/commu
   templateUrl: './profile-branch.html',
   styleUrl: './profile-branch.css'
 })
-export class ProfileBranch {
-  @Input() role: string = '';
+export class ProfileBranch implements OnInit {
+  @Input() injected: boolean = false;
 
   savingUser: boolean = false;
   savingBranch: boolean = false;
@@ -36,6 +36,15 @@ export class ProfileBranch {
     this.branchToUpdate = {...this.branch};
   }
 
+  ngOnInit(): void {
+    if (this.injected) {
+      this.user = this.userAuxService.getBranchDetail().user;
+      this.userToUpdate = {...this.user};
+      this.branch = this.userAuxService.getBranchDetail();
+      this.branchToUpdate = {...this.branch};
+    }
+  }
+
   onUpdateUser() {
     this.savingUser = true;
     this.snackBar.open('Actualizando usuario');
@@ -43,8 +52,16 @@ export class ProfileBranch {
       next: (response) => {
         this.savingUser = false;
         this.snackBar.dismiss();
-        this.userAuxService.setUser(response.user);
-        this.communicationService.emitUserInfoChange({ infoChanged: "User" });
+        if (this.injected) {
+          this.userAuxService.setBranchDetailUser(response.user);
+          this.user = this.userAuxService.getBranchDetail().user;
+          this.userToUpdate = {...this.user};
+        } else {
+          this.userAuxService.setUser(response.user);
+          this.user = this.userAuxService.getUser();
+          this.userToUpdate = {...this.user};
+          this.communicationService.emitUserInfoChange({ infoChanged: "User" });
+        }
       },
       error: (error: ErrorMessage) => {
         this.savingUser = false;
@@ -65,8 +82,16 @@ export class ProfileBranch {
       next: (response) => {
         this.savingBranch = false;
         this.snackBar.dismiss();
-        this.userAuxService.setBranch(response.branch);
-        this.communicationService.emitUserInfoChange({ infoChanged: "Branch" });
+        if (this.injected) {
+          this.userAuxService.setBranchDetail(response.branch);
+          this.branch = this.userAuxService.getBranchDetail();
+          this.branchToUpdate = {...this.branch};
+        } else {
+          this.userAuxService.setBranch(response.branch);
+          this.branch = this.userAuxService.getBranch();
+          this.branchToUpdate = {...this.branch};
+          this.communicationService.emitUserInfoChange({ infoChanged: "Branch" });
+        }
       },
       error: (error: ErrorMessage) => {
         this.savingBranch = false;

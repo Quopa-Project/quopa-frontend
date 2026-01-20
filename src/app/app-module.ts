@@ -55,6 +55,9 @@ import { BranchDetail } from './admin/pages/branch-detail/branch-detail';
 import { FindCourts } from './client/pages/find-courts/find-courts';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MAT_DATE_LOCALE, provideNativeDateAdapter} from "@angular/material/core";
+import { CourtAvailability } from './branch/pages/court-availability/court-availability';
+import { OpenReservations } from './client/pages/open-reservations/open-reservations';
+import { BookCourt } from './client/pages/book-court/book-court';
 
 @NgModule({
   declarations: [
@@ -89,7 +92,10 @@ import {MAT_DATE_LOCALE, provideNativeDateAdapter} from "@angular/material/core"
     ProfileClient,
     ProfileSuperadmin,
     BranchDetail,
-    FindCourts
+    FindCourts,
+    CourtAvailability,
+    OpenReservations,
+    BookCourt
   ],
   imports: [
     BrowserModule,

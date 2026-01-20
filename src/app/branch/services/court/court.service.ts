@@ -23,6 +23,14 @@ export class CourtService extends BaseService<CourtApiResponse> {
     }).pipe(catchError(this.handleError));
   }
 
+  getById(id: number): Observable<CourtApiResponse> {
+    return this.http.get<CourtApiResponse>(`${this.basePath}/${id}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).pipe(catchError(this.handleError));
+  }
+
   getByBranchId(id: number): Observable<CourtApiResponse> {
     return this.http.get<CourtApiResponse>(`${this.basePath}/branch/${id}`, {
       headers: {
