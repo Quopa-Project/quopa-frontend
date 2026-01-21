@@ -1,0 +1,22 @@
+td {
+    background-color: white;
+}
+
+mat-card {
+    background-color: #ffffff;
+}
+
+.availability-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 90%;
+    gap: 16px;
+    margin: 10px 0;
+}
+
+/* Media Query para móvil */
+@media (max-width: 767px) {
+    .availability-container {
+        grid-template-columns: 1fr;
+    }
+}

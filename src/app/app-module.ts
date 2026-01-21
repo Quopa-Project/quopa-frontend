@@ -58,6 +58,8 @@ import {MAT_DATE_LOCALE, provideNativeDateAdapter} from "@angular/material/core"
 import { CourtAvailability } from './branch/pages/court-availability/court-availability';
 import { OpenReservations } from './client/pages/open-reservations/open-reservations';
 import { BookCourt } from './client/pages/book-court/book-court';
+import {MatChipsModule} from "@angular/material/chips";
+import { CourtAvailabilityDialog } from './branch/dialogs/court-availability.dialog/court-availability.dialog';
 
 @NgModule({
   declarations: [
@@ -95,7 +97,8 @@ import { BookCourt } from './client/pages/book-court/book-court';
     FindCourts,
     CourtAvailability,
     OpenReservations,
-    BookCourt
+    BookCourt,
+    CourtAvailabilityDialog
   ],
   imports: [
     BrowserModule,
@@ -119,7 +122,8 @@ import { BookCourt } from './client/pages/book-court/book-court';
     MatTabsModule,
     MatSelectModule,
     MatCheckbox,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatChipsModule
   ],
   providers: [
     provideHttpClient(),

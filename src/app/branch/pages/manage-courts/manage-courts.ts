@@ -9,6 +9,8 @@ import {ErrorMessage} from "../../../shared/models/error-message";
 import {ErrorSnackBar} from "../../../shared/pages/error-snack-bar/error-snack-bar";
 import {MatSidenav} from "@angular/material/sidenav";
 import {CreateCourtDialog} from "../../dialogs/create-court.dialog/create-court.dialog";
+import {ActivatedRoute, Router} from "@angular/router";
+import {CourtAvailabilityDialog} from "../../dialogs/court-availability.dialog/court-availability.dialog";
 
 @Component({
   selector: 'app-manage-courts',
@@ -22,6 +24,8 @@ export class ManageCourts implements OnInit {
   dataLoaded: number = 0;
   savingCourt: boolean = false;
 
+  role: string;
+
   branch: BranchDto;
 
   courts: CourtDto[];
@@ -31,7 +35,9 @@ export class ManageCourts implements OnInit {
   displayedColumns: string[] = ['description', 'capacity', 'price', 'actions'];
 
   constructor(private courtService: CourtService, private snackBar: MatSnackBar,
-              private dialog: MatDialog, public userAuxService: UserAuxService) {
+              private dialog: MatDialog, public userAuxService: UserAuxService,
+              private router: Router, private route: ActivatedRoute) {
+    this.role = this.route.parent?.snapshot.params['role'];
     this.branch = userAuxService.getBranch();
     this.courts = [];
     this.courtToEdit = {} as CourtDto;
@@ -110,5 +116,22 @@ export class ManageCourts implements OnInit {
       ...court,
       branch: {...court.branch}
     };
+  }
+
+  goToCourtAvailability(court: CourtDto) {
+    if (this.role === 'BRANCH') {
+      this.router.navigate(['../court-availability', court.id], { relativeTo: this.route }).then();
+    } else {
+      this.userAuxService.setCourt(court);
+
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.maxWidth = '900px';
+      dialogConfig.data = {
+        court: court
+      };
+
+      this.dialog.open(CourtAvailabilityDialog, dialogConfig);
+    }
   }
 }
