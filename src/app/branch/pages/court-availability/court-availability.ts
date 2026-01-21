@@ -1,6 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CourtDto} from "../../models/court.dto";
 import {UserAuxService} from "../../../shared/services/user-aux/user-aux.service";
+import {firstValueFrom} from "rxjs";
+import {ErrorSnackBar} from "../../../shared/pages/error-snack-bar/error-snack-bar";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {OccupancyService} from "../../services/occupancy/occupancy-service";
+import {OccupancyDto} from "../../models/occupancy.dto";
+import {OccupancyTypeService} from "../../../superadmin/services/occupancy-type/occupancy-type.service";
+import {ErrorMessage} from "../../../shared/models/error-message";
+import {OccupancyTypeDto} from "../../../superadmin/models/occupancy-type.dto";
 
 @Component({
   selector: 'app-court-availability',
@@ -11,60 +19,41 @@ import {UserAuxService} from "../../../shared/services/user-aux/user-aux.service
 export class CourtAvailability implements OnInit {
   @Input() injected: boolean = false;
 
-  dataLoaded: number = 1;
+  dataLoaded: number = 0;
+
+  savingOccupancy: boolean = false;
 
   court: CourtDto;
 
-  blockedTimes = [
-    {
-      id: 1,
-      title: 'Mantenimiento de Redes',
-      type: 'maintenance',
-      dateRange: '20 Jan 2026 - 20 Jan 2026',
-      timeRange: '08:00 - 10:00',
-      isRecurring: false
-    },
-    {
-      id: 2,
-      title: 'Clase de Tenis - Prof. García',
-      type: 'class',
-      dateRange: '20 Jan 2026 - 20 Mar 2026',
-      timeRange: '16:00 - 18:00',
-      isRecurring: true,
-      days: ['Lunes', 'Miércoles']
-    },
-    {
-      id: 3,
-      title: 'Torneo Relámpago Local',
-      type: 'event',
-      dateRange: '25 Jan 2026 - 26 Jan 2026',
-      timeRange: '09:00 - 21:00',
-      isRecurring: false
-    },
-    {
-      id: 4,
-      title: 'Limpieza de Superficie',
-      type: 'maintenance',
-      dateRange: '22 Jan 2026 - 22 Jan 2026',
-      timeRange: '13:00 - 14:00',
-      isRecurring: false
-    }
-  ];
+  occupancyToSave: OccupancyDto;
 
-  displayedColumns: string[] = ['icon', 'title', 'actions'];
+  occupancyTypes: OccupancyTypeDto[];
+  occupancies: OccupancyDto[];
 
-  constructor(private userAuxService: UserAuxService) {
+  dayMap: { [key: number]: string } = {
+    0: 'D', 1: 'L', 2: 'M', 3: 'X', 4: 'J', 5: 'V', 6: 'S'
+  };
+
+  displayedColumns: string[] = ['icon', 'title', 'days'];
+
+  constructor(private occupancyService: OccupancyService, private occupancyTypeService: OccupancyTypeService,
+              private userAuxService: UserAuxService, private snackBar: MatSnackBar,) {
     this.court = this.userAuxService.getCourt();
-    console.log(this.court);
+    this.occupancyToSave = { courtId: this.court.id } as OccupancyDto;
+    this.occupancyTypes = [];
+    this.occupancies = [];
   }
 
   async ngOnInit(): Promise<void> {
-    /*try {
-      const sportApiResponse =  await firstValueFrom(this.sportService.getAll());
-      this.sports = sportApiResponse.sports;
+    try {
+      const occupancyTypeApiResponse = await firstValueFrom(this.occupancyTypeService.getAll());
+      this.occupancyTypes = occupancyTypeApiResponse.occupancyTypes;
 
-      const courtApiResponse =  await firstValueFrom(this.courtService.getAll());
-      this.courts = courtApiResponse.courts;
+      const occupancyApiResponse = await firstValueFrom(this.occupancyService.getByCourtIdAndActive(this.court.id));
+      this.occupancies = occupancyApiResponse.occupancies.map((occ: OccupancyDto) => {
+        occ.dayNames = occ.days ? occ.days.map((dayNum: number) => this.dayMap[dayNum]) : [];
+        return occ;
+      });
 
       this.dataLoaded = 1;
     } catch (error: any) {
@@ -75,11 +64,55 @@ export class CourtAvailability implements OnInit {
         },
         duration: 2000
       });
-    }*/
+    }
   }
 
-  deleteBlock(id: number) {
-    this.blockedTimes = this.blockedTimes.filter(item => item.id !== id);
-    console.log('Eliminando bloqueo:', id);
+  refreshOccupancies() {
+    this.dataLoaded = 0;
+    this.occupancyService.getByCourtIdAndActive(this.court.id).subscribe({
+      next: (response) => {
+        this.dataLoaded = 1;
+        this.occupancies = response.occupancies.map((occ: OccupancyDto) => {
+          occ.dayNames = occ.days ? occ.days.map((dayNum: number) => this.dayMap[dayNum]) : [];
+          return occ;
+        });
+      },
+      error: (error: ErrorMessage) => {
+        this.dataLoaded = -1;
+        this.snackBar.openFromComponent(ErrorSnackBar, {
+          data: {
+            messages: error.message
+          },
+          duration: 2000
+        });
+      }
+    });
+  }
+
+  cleanOccupancy() {
+    this.occupancyToSave = { courtId: this.court.id } as OccupancyDto;
+  }
+
+  onSaveOccupancy() {
+    this.savingOccupancy = true;
+    this.occupancyToSave.startTime = this.occupancyToSave.startTimeDate.getHours().toString() + ':' + this.occupancyToSave.startTimeDate.getMinutes().toString();
+    this.occupancyToSave.endTime = this.occupancyToSave.endTimeDate.getHours().toString() + ':' + this.occupancyToSave.endTimeDate.getMinutes().toString();
+    this.snackBar.open('Creando ocupación');
+    this.occupancyService.create(this.occupancyToSave).subscribe({
+      next: () => {
+        this.savingOccupancy = false;
+        this.snackBar.dismiss();
+        this.refreshOccupancies();
+      },
+      error: (error: ErrorMessage) => {
+        this.savingOccupancy = false;
+        this.snackBar.openFromComponent(ErrorSnackBar, {
+          data: {
+            messages: error.message
+          },
+          duration: 2000
+        });
+      }
+    });
   }
 }

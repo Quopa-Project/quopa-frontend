@@ -29,10 +29,10 @@ export class FindCourts implements OnInit {
 
   async ngOnInit(): Promise<void> {
     try {
-      const sportApiResponse =  await firstValueFrom(this.sportService.getAll());
+      const sportApiResponse = await firstValueFrom(this.sportService.getAll());
       this.sports = sportApiResponse.sports;
 
-      const courtApiResponse =  await firstValueFrom(this.courtService.getAll());
+      const courtApiResponse = await firstValueFrom(this.courtService.getAll());
       this.courts = courtApiResponse.courts;
 
       this.dataLoaded = 1;

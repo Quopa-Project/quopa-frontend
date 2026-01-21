@@ -60,6 +60,9 @@ import { OpenReservations } from './client/pages/open-reservations/open-reservat
 import { BookCourt } from './client/pages/book-court/book-court';
 import {MatChipsModule} from "@angular/material/chips";
 import { CourtAvailabilityDialog } from './branch/dialogs/court-availability.dialog/court-availability.dialog';
+import {MatTimepickerModule} from "@angular/material/timepicker";
+import { ManageOccupancyTypes } from './superadmin/pages/manage-occupancy-types/manage-occupancy-types';
+import { CreateOccupancyTypeDialog } from './superadmin/dialogs/create-occupancy-type.dialog/create-occupancy-type.dialog';
 
 @NgModule({
   declarations: [
@@ -98,7 +101,9 @@ import { CourtAvailabilityDialog } from './branch/dialogs/court-availability.dia
     CourtAvailability,
     OpenReservations,
     BookCourt,
-    CourtAvailabilityDialog
+    CourtAvailabilityDialog,
+    ManageOccupancyTypes,
+    CreateOccupancyTypeDialog
   ],
   imports: [
     BrowserModule,
@@ -123,7 +128,8 @@ import { CourtAvailabilityDialog } from './branch/dialogs/court-availability.dia
     MatSelectModule,
     MatCheckbox,
     MatDatepickerModule,
-    MatChipsModule
+    MatChipsModule,
+    MatTimepickerModule
   ],
   providers: [
     provideHttpClient(),
