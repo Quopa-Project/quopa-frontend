@@ -7,7 +7,7 @@ import {provideHttpClient} from "@angular/common/http";
 import {MatToolbar} from "@angular/material/toolbar";
 import { Login } from './security/pages/login/login';
 import {MatButton, MatIconButton} from "@angular/material/button";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInput} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import { ErrorSnackBar } from './shared/pages/error-snack-bar/error-snack-bar';
@@ -63,6 +63,7 @@ import { CourtAvailabilityDialog } from './branch/dialogs/court-availability.dia
 import {MatTimepickerModule} from "@angular/material/timepicker";
 import { ManageOccupancyTypes } from './superadmin/pages/manage-occupancy-types/manage-occupancy-types';
 import { CreateOccupancyTypeDialog } from './superadmin/dialogs/create-occupancy-type.dialog/create-occupancy-type.dialog';
+import {MatSlideToggle} from "@angular/material/slide-toggle";
 
 @NgModule({
   declarations: [
@@ -129,7 +130,9 @@ import { CreateOccupancyTypeDialog } from './superadmin/dialogs/create-occupancy
     MatCheckbox,
     MatDatepickerModule,
     MatChipsModule,
-    MatTimepickerModule
+    MatTimepickerModule,
+    ReactiveFormsModule,
+    MatSlideToggle
   ],
   providers: [
     provideHttpClient(),

@@ -1,1 +1,74 @@
-<p>book-court works!</p>
+<div style="display: flex; justify-content: center;">
+    <div class="content-wrapper">
+        <mat-card>
+            <img mat-card-image src="https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?q=80&w=500" alt="Cancha" style="height: 200px; object-fit: cover;">
+            <mat-card-header>
+                <mat-card-title>{{court.sport.name}} - {{court.description}}</mat-card-title>
+                <mat-card-subtitle>{{court.branch.address}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <p>Capacidad <strong>{{ court.capacity }} personas</strong></p>
+                <p>Precio por hora: <strong>S/. {{court.price}}</strong></p>
+            </mat-card-content>
+        </mat-card>
+        <mat-card>
+            <mat-stepper style="background-color: white; border-radius: 15px" [linear]="true">
+                <mat-step label="Fecha y Hora" [editable]="!savingBooking" [stepControl]="firstFormGroup">
+                    <div style="display: flex; flex-direction: column; gap: 16px">
+                        <h3 style="margin: 0">¿Cuándo quieres jugar?</h3>
+                        <form [formGroup]="firstFormGroup">
+                            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                                <mat-label>Selecciona una fecha</mat-label>
+                                <input matInput [matDatepicker]="picker" formControlName="date">
+                                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </form>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 12px;">
+                            @for (time of availableTimes; track time) {
+                                <button matButton="outlined" [class.selected-time]="firstFormGroup.value.time === time" (click)="selectTime(time)">
+                                    {{time}}
+                                </button>
+                            }
+                        </div>
+                        <div style="display: flex; justify-content: flex-end;">
+                            <button matButton="filled" matStepperNext [disabled]="!firstFormGroup.valid">
+                                Siguiente
+                            </button>
+                        </div>
+                    </div>
+                </mat-step>
+                <mat-step label="Resumen" [editable]="!savingBooking" [stepControl]="secondFormGroup">
+                    <div style="display: flex; flex-direction: column; gap: 16px">
+                        <h3 style="margin: 0">Detalles de la reserva</h3>
+                        <div style="display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 8px; background-color: #f5f5f5">
+                            <p style="display: flex; align-items: center; gap: 10px; margin: 0"><mat-icon>calendar_today</mat-icon> {{firstFormGroup.value.date | date:'fullDate'}}</p>
+                            <p style="display: flex; align-items: center; gap: 10px; margin: 0"><mat-icon>access_time</mat-icon> {{firstFormGroup.value.time}} (1 Hora)</p>
+                        </div>
+                        <form [formGroup]="secondFormGroup" style="display: flex; flex-direction: column; gap: 8px">
+                            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                                <mat-label>Cantidad de personas</mat-label>
+                                <input matInput type="number" formControlName="numberOfPeople">
+                                <mat-icon matPrefix>groups</mat-icon>
+                            </mat-form-field>
+                            <div style="display: flex; flex-direction: column; gap: 4px;">
+                                <mat-slide-toggle formControlName="isPublic">
+                                    ¿Hacer reserva pública?
+                                </mat-slide-toggle>
+                                <small style="color: #666; font-style: italic;">Las reservas públicas permiten que otros jugadores se unan.</small>
+                            </div>
+                        </form>
+                        <div style="display: flex; justify-content: flex-end; gap: 8px">
+                            <button matButton="outlined" [disabled]="savingBooking" matStepperPrevious>
+                                Atrás
+                            </button>
+                            <button matButton="filled" [disabled]="savingBooking" (click)="createBooking()">
+                                Confirmar Reserva
+                            </button>
+                        </div>
+                    </div>
+                </mat-step>
+            </mat-stepper>
+        </mat-card>
+    </div>
+</div>
