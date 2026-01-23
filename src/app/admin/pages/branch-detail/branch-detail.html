@@ -5,12 +5,15 @@
             <mat-icon>arrow_back</mat-icon> Volver a sucursales
         </button>
     </div>
-    <mat-tab-group style="margin: 0 10px">
+    <mat-tab-group style="margin: 0 10px; height: 100%;">
         <mat-tab label="Dashboard">
             <app-dashboard-branch></app-dashboard-branch>
         </mat-tab>
         <mat-tab label="Canchas">
             <app-manage-courts [injected]="true"></app-manage-courts>
+        </mat-tab>
+        <mat-tab label="Reservas">
+            <app-manage-bookings [injected]="true"></app-manage-bookings>
         </mat-tab>
         <mat-tab label="Perfil">
             <app-profile-branch [injected]="true"></app-profile-branch>

@@ -22,4 +22,28 @@ export class BookingService extends BaseService<BookingApiResponse> {
       }
     }).pipe(catchError(this.handleError));
   }
+
+  getByUserId(id: number): Observable<BookingApiResponse> {
+    return this.http.get<BookingApiResponse>(`${this.basePath}/user/${id}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).pipe(catchError(this.handleError));
+  }
+
+  getByBranchId(id: number): Observable<BookingApiResponse> {
+    return this.http.get<BookingApiResponse>(`${this.basePath}/branch/${id}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).pipe(catchError(this.handleError));
+  }
+
+  update(id: number, status: string): Observable<BookingApiResponse> {
+    return this.http.put<BookingApiResponse>(`${this.basePath}/${id}`, { status: status }, {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    }).pipe(catchError(this.handleError));
+  }
 }

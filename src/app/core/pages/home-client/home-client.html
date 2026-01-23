@@ -20,10 +20,6 @@
                 <mat-icon>event</mat-icon>
                 <span>Reservas</span>
             </button>
-            <button matButton style="justify-content: flex-start" [routerLink]="['my-ratings']">
-                <mat-icon>grade</mat-icon>
-                <span>Reseñas</span>
-            </button>
             <button matButton style="justify-content: flex-start" [routerLink]="['profile']">
                 <mat-icon>person</mat-icon>
                 <span>Perfil</span>
@@ -39,7 +35,7 @@
         <router-outlet></router-outlet>
     </div>
     <div class="client-layout-mobile" style="background: #ffffff;">
-        <div style="display: flex; width: 100%; margin: 10px 0;">
+        <div style="display: grid; width: 100%; margin: 10px 0; grid-template-columns: 1fr 1fr 1fr 1fr;">
             <button matButton [routerLink]="['dashboard']">
                 <div style="display: flex; flex-direction: column; align-items: center;">
                     <mat-icon>dashboard</mat-icon>
@@ -56,12 +52,6 @@
                 <div style="display: flex; flex-direction: column; align-items: center;">
                     <mat-icon>event</mat-icon>
                     <span>Reservas</span>
-                </div>
-            </button>
-            <button matButton [routerLink]="['my-ratings']">
-                <div style="display: flex; flex-direction: column; align-items: center;">
-                    <mat-icon>grade</mat-icon>
-                    <span>Reseñas</span>
                 </div>
             </button>
             <button matButton [routerLink]="['profile']">

@@ -1,0 +1,65 @@
+<div style="width: min(500px, 92vw); background-color: white;">
+    <h2 mat-dialog-title>
+        @if (data.mode === 'VIEW') { Ver calificación } @else { Calificar reserva }
+    </h2>
+    <mat-dialog-content>
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <mat-icon>event</mat-icon>
+                <span style="font-weight: 600;">
+                  Reserva #{{ data.booking.id }}
+                </span>
+            </div>
+            @if (data.mode === 'VIEW') {
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <mat-icon>star</mat-icon>
+                        <span style="font-weight: 600;">Puntaje</span>
+                    </div>
+                    <span style="font-size: 18px; font-weight: 700;">
+                      {{ data.booking.rating.score }} / 5
+                    </span>
+                </div>
+                <mat-divider></mat-divider>
+                <div style="display: flex; flex-direction: column; gap: 6px;">
+                    <span style="font-weight: 600;">Comentario</span>
+                    @if (data.booking.rating.comment) {
+                        <span>{{ data.booking.rating.comment }}</span>
+                    } @else {
+                        <span>Sin comentario.</span>
+                    }
+                </div>
+            } @else {
+                <div style="display: flex; gap: 8px">
+                    <span>Puntaje</span>
+                    <span>{{ data.rating.score }} / 5</span>
+                </div>
+                <mat-slider [min]="1" [max]="5" [step]="0.5">
+                    <input matSliderThumb [(ngModel)]="data.rating.score" />
+                </mat-slider>
+                <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                    <mat-label>Puntaje (1 a 5)</mat-label>
+                    <input matInput type="number" [step]="0.5" min="1" max="5" [(ngModel)]="data.rating.score"/>
+                </mat-form-field>
+                <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                    <mat-label>Comentario (opcional)</mat-label>
+                    <textarea matInput rows="4" maxlength="500" [(ngModel)]="data.rating.comment"></textarea>
+                </mat-form-field>
+            }
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button mat-dialog-close [disabled]="loading">Cerrar</button>
+        @if (data.mode !== 'VIEW') {
+            <button matButton="filled" [disabled]="loading" (click)="onCreateRating()">
+                <mat-icon>save</mat-icon>
+                <span>Guardar</span>
+            </button>
+        }
+        @if (loading) {
+            <div style="margin-left: 8px">
+                <mat-progress-spinner diameter="24" mode="indeterminate"></mat-progress-spinner>
+            </div>
+        }
+    </mat-dialog-actions>
+</div>

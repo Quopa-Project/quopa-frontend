@@ -28,6 +28,8 @@ import {BookCourt} from "./client/pages/book-court/book-court";
 import {courtIdExistsGuard} from "./branch/guards/court-id-exists-guard";
 import {anyCourtIdExistsGuard} from "./client/guards/any-court-id-exists-guard";
 import {ManageOccupancyTypes} from "./superadmin/pages/manage-occupancy-types/manage-occupancy-types";
+import {ManageBookings} from "./branch/pages/manage-bookings/manage-bookings";
+import {MyBookings} from "./client/pages/my-bookings/my-bookings";
 
 const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noTokenGuard] },
@@ -51,9 +53,11 @@ const routes: Routes = [
       //Branch
       { path: 'manage-courts', component: ManageCourts, canActivate: [correctRoleGuard, branchRoleGuard] },
       { path: 'court-availability/:id', component: CourtAvailability, canActivate: [correctRoleGuard, branchRoleGuard, courtIdExistsGuard] },
+      { path: 'manage-bookings', component: ManageBookings, canActivate: [correctRoleGuard, branchRoleGuard] },
       //Client
       { path: 'find-courts', component: FindCourts, canActivate: [correctRoleGuard, clientRoleGuard] },
       { path: 'book-court/:id', component: BookCourt, canActivate: [correctRoleGuard, clientRoleGuard, anyCourtIdExistsGuard] },
+      { path: 'my-bookings', component: MyBookings, canActivate: [correctRoleGuard, clientRoleGuard] },
       { path: 'open-reservations', component: OpenReservations, canActivate: [correctRoleGuard, clientRoleGuard] },
 
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

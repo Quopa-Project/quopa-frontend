@@ -64,6 +64,10 @@ import {MatTimepickerModule} from "@angular/material/timepicker";
 import { ManageOccupancyTypes } from './superadmin/pages/manage-occupancy-types/manage-occupancy-types';
 import { CreateOccupancyTypeDialog } from './superadmin/dialogs/create-occupancy-type.dialog/create-occupancy-type.dialog';
 import {MatSlideToggle} from "@angular/material/slide-toggle";
+import { ManageBookings } from './branch/pages/manage-bookings/manage-bookings';
+import { MyBookings } from './client/pages/my-bookings/my-bookings';
+import { CreateSeeRatingDialog } from './client/dialogs/create-see-rating.dialog/create-see-rating.dialog';
+import {MatSliderModule} from "@angular/material/slider";
 
 @NgModule({
   declarations: [
@@ -104,7 +108,10 @@ import {MatSlideToggle} from "@angular/material/slide-toggle";
     BookCourt,
     CourtAvailabilityDialog,
     ManageOccupancyTypes,
-    CreateOccupancyTypeDialog
+    CreateOccupancyTypeDialog,
+    ManageBookings,
+    MyBookings,
+    CreateSeeRatingDialog
   ],
   imports: [
     BrowserModule,
@@ -132,7 +139,8 @@ import {MatSlideToggle} from "@angular/material/slide-toggle";
     MatChipsModule,
     MatTimepickerModule,
     ReactiveFormsModule,
-    MatSlideToggle
+    MatSlideToggle,
+    MatSliderModule
   ],
   providers: [
     provideHttpClient(),
