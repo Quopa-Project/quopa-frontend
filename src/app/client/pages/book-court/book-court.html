@@ -62,7 +62,7 @@
                             <button matButton="outlined" [disabled]="savingBooking" matStepperPrevious>
                                 Atrás
                             </button>
-                            <button matButton="filled" [disabled]="savingBooking" (click)="createBooking()">
+                            <button matButton="filled" [disabled]="savingBooking || !secondFormGroup.valid" (click)="createBooking()">
                                 Confirmar Reserva
                             </button>
                         </div>

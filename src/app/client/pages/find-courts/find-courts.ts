@@ -6,6 +6,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {firstValueFrom} from "rxjs";
 import {CourtDto} from "../../../branch/models/court.dto";
 import {CourtService} from "../../../branch/services/court/court.service";
+import {ErrorMessage} from "../../../shared/models/error-message";
 
 @Component({
   selector: 'app-find-courts',
@@ -15,7 +16,6 @@ import {CourtService} from "../../../branch/services/court/court.service";
 })
 export class FindCourts implements OnInit {
   dataLoaded: number = 0;
-  loading: boolean = false;
 
   sportIdSelected: number;
 
@@ -45,5 +45,44 @@ export class FindCourts implements OnInit {
         duration: 2000
       });
     }
+  }
+
+  onSportChange() {
+    this.dataLoaded = 0;
+    this.courtService.getBySportId(this.sportIdSelected).subscribe({
+      next: (response) => {
+        this.dataLoaded = 1;
+        this.courts = response.courts;
+      },
+      error: (error: ErrorMessage) => {
+        this.dataLoaded = -1;
+        this.snackBar.openFromComponent(ErrorSnackBar, {
+          data: {
+            messages: error.message
+          },
+          duration: 2000
+        });
+      }
+    });
+  }
+
+  resetFilters() {
+    this.sportIdSelected = 0;
+    this.dataLoaded = 0;
+    this.courtService.getAll().subscribe({
+      next: (response) => {
+        this.dataLoaded = 1;
+        this.courts = response.courts;
+      },
+      error: (error: ErrorMessage) => {
+        this.dataLoaded = -1;
+        this.snackBar.openFromComponent(ErrorSnackBar, {
+          data: {
+            messages: error.message
+          },
+          duration: 2000
+        });
+      }
+    });
   }
 }

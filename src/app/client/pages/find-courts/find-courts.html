@@ -3,15 +3,15 @@
         <mat-form-field appearance="outline" subscriptSizing="dynamic">
             <mat-label>¿Qué deporte buscas?</mat-label>
             <mat-icon matPrefix>sports_tennis</mat-icon>
-            <mat-select [(ngModel)]="sportIdSelected">
+            <mat-select [(ngModel)]="sportIdSelected" (selectionChange)="onSportChange()">
                 @for (sport of sports; track sport.id) {
                     <mat-option [value]="sport.id">{{ sport.name }}</mat-option>
                 }
             </mat-select>
         </mat-form-field>
-        <button matButton="filled" [disabled]="loading">
-            <mat-icon>search</mat-icon>
-            <span>Buscar</span>
+        <button matButton="outlined" [disabled]="dataLoaded === 0 || sportIdSelected === 0" (click)="resetFilters()">
+            <mat-icon>restart_alt</mat-icon>
+            <span>Quitar filtro</span>
         </button>
         <button matButton="outlined" [routerLink]="['../open-reservations']">
             <mat-icon>group</mat-icon>

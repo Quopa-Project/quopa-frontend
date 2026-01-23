@@ -39,6 +39,14 @@ export class CourtService extends BaseService<CourtApiResponse> {
     }).pipe(catchError(this.handleError));
   }
 
+  getBySportId(id: number): Observable<CourtApiResponse> {
+    return this.http.get<CourtApiResponse>(`${this.basePath}/sport/${id}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).pipe(catchError(this.handleError));
+  }
+
   update(id: number, body: CourtDto): Observable<CourtApiResponse> {
     return this.http.put<CourtApiResponse>(`${this.basePath}/${id}`, body, {
       headers: {

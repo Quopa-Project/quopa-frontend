@@ -43,7 +43,7 @@ export class BookCourt {
       time: ['', Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
-      numberOfPeople: [2, [Validators.required, Validators.min(1), Validators.max(10)]],
+      numberOfPeople: [2, [Validators.required, Validators.min(1), Validators.max(this.court.capacity)]],
       isPublic: [false]
     });
   }
