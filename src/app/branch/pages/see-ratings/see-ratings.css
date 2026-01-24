@@ -1,0 +1,19 @@
+mat-card {
+    background-color: #ffffff;
+}
+
+mat-expansion-panel {
+    background-color: #ffffff;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+}
+
+@media (max-width: 767px) {
+    .content {
+        grid-template-columns: 1fr;
+    }
+}

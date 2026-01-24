@@ -22,4 +22,12 @@ export class RatingService extends BaseService<RatingApiResponse> {
       }
     }).pipe(catchError(this.handleError));
   }
+
+  getByBranchId(id: number): Observable<RatingApiResponse> {
+    return this.http.get<RatingApiResponse>(`${this.basePath}/branch/${id}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).pipe(catchError(this.handleError));
+  }
 }

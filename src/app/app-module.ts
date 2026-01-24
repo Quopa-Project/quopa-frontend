@@ -68,6 +68,8 @@ import { ManageBookings } from './branch/pages/manage-bookings/manage-bookings';
 import { MyBookings } from './client/pages/my-bookings/my-bookings';
 import { CreateSeeRatingDialog } from './client/dialogs/create-see-rating.dialog/create-see-rating.dialog';
 import {MatSliderModule} from "@angular/material/slider";
+import { SeeRatings } from './branch/pages/see-ratings/see-ratings';
+import {MatExpansionModule} from "@angular/material/expansion";
 
 @NgModule({
   declarations: [
@@ -111,7 +113,8 @@ import {MatSliderModule} from "@angular/material/slider";
     CreateOccupancyTypeDialog,
     ManageBookings,
     MyBookings,
-    CreateSeeRatingDialog
+    CreateSeeRatingDialog,
+    SeeRatings
   ],
   imports: [
     BrowserModule,
@@ -140,7 +143,8 @@ import {MatSliderModule} from "@angular/material/slider";
     MatTimepickerModule,
     ReactiveFormsModule,
     MatSlideToggle,
-    MatSliderModule
+    MatSliderModule,
+    MatExpansionModule
   ],
   providers: [
     provideHttpClient(),
