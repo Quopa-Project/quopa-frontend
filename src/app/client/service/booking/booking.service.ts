@@ -42,7 +42,8 @@ export class BookingService extends BaseService<BookingApiResponse> {
   getByIsPublic(isPublic: boolean): Observable<BookingApiResponse> {
     return this.http.get<BookingApiResponse>(`${this.basePath}/isPublic/${isPublic}`, {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
     }).pipe(catchError(this.handleError));
   }
