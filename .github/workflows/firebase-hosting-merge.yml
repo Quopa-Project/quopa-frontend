@@ -17,3 +17,18 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_QUOPA_PERU }}
           channelId: live
           projectId: quopa-peru
+      - name: Notificación en Discord
+        if: success()
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: "Despliegue exitoso en *quopa-frontend*"
+
+      - name: Notificación en Discord (fallo)
+        if: failure()
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: 'El despliegue en *quopa-frontend* ha fallado'
