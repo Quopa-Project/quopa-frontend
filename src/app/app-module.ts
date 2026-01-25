@@ -70,6 +70,8 @@ import { CreateSeeRatingDialog } from './client/dialogs/create-see-rating.dialog
 import {MatSliderModule} from "@angular/material/slider";
 import { SeeRatings } from './branch/pages/see-ratings/see-ratings';
 import {MatExpansionModule} from "@angular/material/expansion";
+import { ManageJoinBookingDialog } from './client/dialogs/manage-join-booking.dialog/manage-join-booking.dialog';
+import { ManageJoinBookingsDialog } from './client/dialogs/manage-join-bookings.dialog/manage-join-bookings.dialog';
 
 @NgModule({
   declarations: [
@@ -114,7 +116,9 @@ import {MatExpansionModule} from "@angular/material/expansion";
     ManageBookings,
     MyBookings,
     CreateSeeRatingDialog,
-    SeeRatings
+    SeeRatings,
+    ManageJoinBookingDialog,
+    ManageJoinBookingsDialog
   ],
   imports: [
     BrowserModule,

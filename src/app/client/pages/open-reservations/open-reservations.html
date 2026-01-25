@@ -1,1 +1,196 @@
-<p>open-reservations works!</p>
+<div style="display: flex; flex-direction: column; height: 100%;">
+    <mat-sidenav-container style="height: 100%; background: #f8fafc;">
+        <mat-sidenav-content>
+            <div style="margin: 10px">
+                <mat-card>
+                    <div style="margin: 8px">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <mat-icon>public</mat-icon>
+                            <span>Reservas públicas</span>
+                        </div>
+                    </div>
+                    @if (dataLoadedJoinBooking === 1) {
+                        <div style="margin: 8px; overflow: auto;">
+                            <table mat-table [dataSource]="joinBookings">
+                                <ng-container matColumnDef="branch">
+                                    <th mat-header-cell *matHeaderCellDef style="font-weight: 600; background: #f5f5f5"> Sucursal </th>
+                                    <td mat-cell *matCellDef="let j">
+                                        {{ j.booking.court.branch.name }} - {{ j.booking.court.branch.address }}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="court">
+                                    <th mat-header-cell *matHeaderCellDef style="font-weight: 600; background: #f5f5f5"> Cancha </th>
+                                    <td mat-cell *matCellDef="let j">
+                                        {{ j.booking.court.sport.name }} - {{ j.booking.court.description }}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="isPayed">
+                                    <th mat-header-cell *matHeaderCellDef style="font-weight: 600; background: #f5f5f5"> Pagado </th>
+                                    <td mat-cell *matCellDef="let j">
+                                        {{ j.isPayed ? 'Si' : 'No' }}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="status">
+                                    <th mat-header-cell *matHeaderCellDef style="font-weight: 600; background: #f5f5f5"> Estado </th>
+                                    <td mat-cell *matCellDef="let j">
+                                        {{ j.status }}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="actions">
+                                    <th mat-header-cell *matHeaderCellDef style="font-weight: 600; background: #f5f5f5; text-align: right"> Acciones </th>
+                                    <td mat-cell *matCellDef="let j">
+                                        <div style="display: flex; justify-content: end;">
+                                            @if (!j.isPayed) {
+                                                <button mat-icon-button (click)="manageJoinBooking(j)">
+                                                    <mat-icon>how_to_reg</mat-icon>
+                                                </button>
+                                            }
+                                        </div>
+                                    </td>
+                                </ng-container>
+                                <tr mat-header-row *matHeaderRowDef="displayedColumnsJoinBooking"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumnsJoinBooking"></tr>
+                            </table>
+                        </div>
+                    } @else if (dataLoadedJoinBooking === 0) {
+                        <div style="display: flex; justify-content: center; margin: 20px 0">
+                            <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+                        </div>
+                    } @else {
+                        <div style="display: flex; flex-direction: column; align-items: center; margin: 20px 0">
+                            <mat-icon>search_off</mat-icon>
+                            <span>No se encontraron peticiones.</span>
+                        </div>
+                    }
+                    @if (dataLoadedBookings === 1) {
+                        <div style="margin: 8px; overflow: auto;">
+                            <table mat-table [dataSource]="bookings">
+                                <ng-container matColumnDef="date">
+                                    <th mat-header-cell *matHeaderCellDef style="font-weight: 600; background: #f5f5f5"> Fecha </th>
+                                    <td mat-cell *matCellDef="let b">
+                                        {{ b.date | date:'fullDate'}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="time">
+                                    <th mat-header-cell *matHeaderCellDef style="font-weight: 600; background: #f5f5f5"> Hora </th>
+                                    <td mat-cell *matCellDef="let b">
+                                        {{ b.time }}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="court">
+                                    <th mat-header-cell *matHeaderCellDef style="font-weight: 600; background: #f5f5f5"> Cancha </th>
+                                    <td mat-cell *matCellDef="let b">
+                                        {{ b.court.sport.name }} - {{ b.court.description }}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="address">
+                                    <th mat-header-cell *matHeaderCellDef style="font-weight: 600; background: #f5f5f5"> Dirección </th>
+                                    <td mat-cell *matCellDef="let b">
+                                        {{ b.court.branch.address }}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="actions">
+                                    <th mat-header-cell *matHeaderCellDef style="font-weight: 600; background: #f5f5f5; text-align: right"> Acciones </th>
+                                    <td mat-cell *matCellDef="let b">
+                                        <div style="display: flex; justify-content: end;">
+                                            <button mat-icon-button (click)="joinBookingForm(formDrawer, b)">
+                                                <mat-icon>group_add</mat-icon>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </ng-container>
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                            </table>
+                        </div>
+                    } @else if (dataLoadedBookings === 0) {
+                        <div style="display: flex; justify-content: center; margin: 20px 0">
+                            <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+                        </div>
+                    } @else {
+                        <div style="display: flex; flex-direction: column; align-items: center; margin: 20px 0">
+                            <mat-icon>search_off</mat-icon>
+                            <span>No se encontraron reservas.</span>
+                        </div>
+                    }
+                </mat-card>
+            </div>
+        </mat-sidenav-content>
+        <mat-sidenav #formDrawer position="end" style="padding: 12px; background: white">
+            <div style="display: flex; justify-content: space-between; margin: 0 5px">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <mat-icon>group_add</mat-icon>
+                    <span>Crear solicitud de unión</span>
+                </div>
+                <button mat-icon-button (click)="formDrawer.close()">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 16px">
+                <mat-card style="padding: 10px">
+                    <mat-card-title>Información a rellenar</mat-card-title>
+                    <mat-divider></mat-divider>
+                    <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <mat-icon aria-hidden="true">paid</mat-icon>
+                                <span>¿Ya pagaste?</span>
+                            </div>
+                            <mat-slide-toggle [(ngModel)]="joinBooking.isPayed">
+                                Pagado
+                            </mat-slide-toggle>
+                        </div>
+                        <div style="display: flex; align-items: center">
+                            <button matButton="filled" [disabled]="savingJoinRequest" (click)="onCreateJoinRequest(formDrawer)">
+                                <mat-icon>save</mat-icon>
+                                <span>Guardar cambios</span>
+                            </button>
+                            @if (savingJoinRequest) {
+                                <div style="margin-left: 8px">
+                                    <mat-progress-spinner diameter="24" mode="indeterminate"></mat-progress-spinner>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </mat-card>
+                <mat-card style="padding: 10px">
+                    <mat-card-title>Detalles</mat-card-title>
+                    <mat-divider></mat-divider>
+                    <mat-list>
+                        <mat-list-item>
+                            <mat-icon matListItemIcon>person</mat-icon>
+                            <div matListItemTitle>Usuario (número de teléfono)</div>
+                            <div matListItemLine>{{ joinBooking.booking.user.phoneNumber }}</div>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <mat-icon matListItemIcon>event</mat-icon>
+                            <div matListItemTitle>Estado de reserva</div>
+                            <div matListItemLine>{{ joinBooking.booking.status }}</div>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <mat-icon matListItemIcon>schedule</mat-icon>
+                            <div matListItemTitle>Fecha y hora</div>
+                            <div matListItemLine>
+                                {{ joinBooking.booking.date | date:'fullDate' }} · {{ joinBooking.booking.time }}
+                            </div>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <mat-icon matListItemIcon>sports_tennis</mat-icon>
+                            <div matListItemTitle>Cancha</div>
+                            <div matListItemLine>
+                                {{ joinBooking.booking.court.sport.name }} - {{ joinBooking.booking.court.description }}
+                            </div>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <mat-icon matListItemIcon>place</mat-icon>
+                            <div matListItemTitle>Sucursal / Dirección</div>
+                            <div matListItemLine>
+                                {{ joinBooking.booking.court.branch.name }} - {{ joinBooking.booking.court.branch.address }}
+                            </div>
+                        </mat-list-item>
+                    </mat-list>
+                </mat-card>
+            </div>
+        </mat-sidenav>
+    </mat-sidenav-container>
+</div>

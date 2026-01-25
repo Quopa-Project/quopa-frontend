@@ -59,6 +59,7 @@ export class BookCourt {
     this.booking.time = this.firstFormGroup.controls['time'].value;
     this.booking.numberOfPeople = this.secondFormGroup.controls['numberOfPeople'].value;
     this.booking.isPublic = this.secondFormGroup.controls['isPublic'].value;
+    this.booking.totalPrice = this.court.price;
     this.bookingService.create(this.booking).subscribe({
       next: () => {
         this.savingBooking = false;

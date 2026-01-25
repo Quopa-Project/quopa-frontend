@@ -8,6 +8,7 @@ export interface BookingDto {
   time: string;
   numberOfPeople: number;
   isPublic: boolean;
+  totalPrice: number;
   user: UserDto;
   court: CourtDto;
   rating: RatingDto;

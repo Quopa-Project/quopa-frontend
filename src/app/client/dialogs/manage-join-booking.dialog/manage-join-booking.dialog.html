@@ -1,0 +1,26 @@
+<div style="width: min(500px, 90vw); background-color: white;">
+    <h2 mat-dialog-title>Actualizar petición</h2>
+    <mat-dialog-content>
+        <div style="display: flex; justify-content: space-between; margin: 10px 0">
+            <div style="display:flex; align-items:center; gap:8px;">
+                <mat-icon aria-hidden="true">paid</mat-icon>
+                <span>¿Ya pagaste?</span>
+            </div>
+            <mat-slide-toggle [(ngModel)]="this.data.joinBooking.isPayed">
+                Pagado
+            </mat-slide-toggle>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button mat-dialog-close [disabled]="savingJoinBooking">Cancelar</button>
+        <button matButton="filled" [disabled]="savingJoinBooking" (click)="onUpdateJoinBooking()">
+            <mat-icon>save</mat-icon>
+            <span>Actualizar</span>
+        </button>
+        @if (savingJoinBooking) {
+            <div style="margin-left: 8px">
+                <mat-progress-spinner diameter="24" mode="indeterminate"></mat-progress-spinner>
+            </div>
+        }
+    </mat-dialog-actions>
+</div>

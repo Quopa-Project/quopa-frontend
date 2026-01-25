@@ -9,6 +9,9 @@ import {UserAuxService} from "../../../shared/services/user-aux/user-aux.service
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {CompanyDto} from "../../../admin/models/company.dto";
 import {CreateSeeRatingDialog} from "../../dialogs/create-see-rating.dialog/create-see-rating.dialog";
+import {ManageJoinBookingDialog} from "../../dialogs/manage-join-booking.dialog/manage-join-booking.dialog";
+import {JoinBookingDto} from "../../models/join-booking.dto";
+import {ManageJoinBookingsDialog} from "../../dialogs/manage-join-bookings.dialog/manage-join-bookings.dialog";
 
 @Component({
   selector: 'app-my-bookings',
@@ -88,7 +91,13 @@ export class MyBookings implements OnInit {
     });
   }
 
-  openJoinRequests(b: BookingDto) {
-    console.log(b)
+  openJoinRequests(booking: BookingDto) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.data = {
+      booking: { ...booking }
+    };
+
+    this.dialog.open(ManageJoinBookingsDialog, dialogConfig);
   }
 }
