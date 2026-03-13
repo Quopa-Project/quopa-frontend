@@ -61,6 +61,17 @@
                 }
               ]
             },
+            "preproduction": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environment/environment.ts",
+                  "with": "src/environment/environment.prod.ts"
+                }
+              ]
+            },
             "development": {
               "optimization": false,
               "extractLicenses": false,
@@ -74,6 +85,9 @@
           "configurations": {
             "production": {
               "buildTarget": "quopa-frontend:build:production"
+            },
+            "preproduction": {
+              "buildTarget": "quopa-frontend:build:preproduction"
             },
             "development": {
               "buildTarget": "quopa-frontend:build:development"
