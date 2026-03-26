@@ -62,7 +62,7 @@ const routes: Routes = [
       { path: 'my-bookings', component: MyBookings, canActivate: [correctRoleGuard, clientRoleGuard] },
       { path: 'open-reservations', component: OpenReservations, canActivate: [correctRoleGuard, clientRoleGuard] },
 
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: '', redirectTo: 'profile', pathMatch: 'full' },
       { path: '**', component: PageNotFound }
     ]
   },
