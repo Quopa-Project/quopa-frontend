@@ -1,0 +1,36 @@
+.tournament-content {
+  display: flex;
+  gap: 20px;
+}
+
+.info-team {
+  background: #ffffff;
+  margin: 0 0 0 10px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 2;
+}
+
+.summary-teams {
+  background: #ffffff;
+  margin: 0 10px 0 0;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+@media (max-width: 767px) {
+  .tournament-content {
+    flex-direction: column;
+  }
+  .info-team {
+    margin: 0 10px;
+  }
+  .summary-teams {
+    margin: 0 10px;
+  }
+}

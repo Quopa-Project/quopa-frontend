@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="tournament-staff-layout-desktop" style="background: #ffffff;">
+        <div style="padding: 16px; display: flex; align-items: center; gap: 12px;">
+            <mat-icon style="width: 40px; height: 40px; font-size: 40px; color: #2fc332;">account_circle</mat-icon>
+            <div style="display: flex; flex-direction: column;">
+                <span>Organizador</span>
+                <small>{{ user.name + ' ' + user.lastName || 'Organizador' }}</small>
+            </div>
+        </div>
+        <div style="flex: 1; padding: 8px; display: flex; flex-direction: column; gap: 8px;">
+            <button matButton style="justify-content: flex-start" [routerLink]="['manage-tournaments']">
+                <mat-icon>emoji_events</mat-icon>
+                <span>Torneos</span>
+            </button>
+            <button matButton style="justify-content: flex-start" [routerLink]="['profile']">
+                <mat-icon>person</mat-icon>
+                <span>Perfil</span>
+            </button>
+        </div>
+        <div style="padding: 12px;">
+            <button matButton="filled" (click)="signOut()" style="background-color: #ff6464; width: 100%;">
+                Cerrar sesión
+            </button>
+        </div>
+    </div>
+    <div style="flex: 1; background: #f8fafc;">
+        <router-outlet></router-outlet>
+    </div>
+    <div class="tournament-staff-layout-mobile" style="background: #ffffff;">
+        <div style="display: grid; width: 100%; margin: 10px 0; grid-template-columns: 1fr 1fr 1fr 1fr;">
+            <button matButton [routerLink]="['manage-tournaments']">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <mat-icon>travel_explore</mat-icon>
+                    <span>Torneos</span>
+                </div>
+            </button>
+            <button matButton [routerLink]="['profile']">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <mat-icon>person</mat-icon>
+                    <span>Perfil</span>
+                </div>
+            </button>
+        </div>
+    </div>
+</div>

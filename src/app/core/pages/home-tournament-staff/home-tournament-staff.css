@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    height: 100%;
+}
+.tournament-staff-layout-desktop {
+    display: flex;
+    flex-direction: column;
+}
+.tournament-staff-layout-mobile {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .container {
+        flex-direction: column;
+    }
+    .tournament-staff-layout-desktop {
+        display: none;
+    }
+    .tournament-staff-layout-mobile {
+        display: flex;
+    }
+}

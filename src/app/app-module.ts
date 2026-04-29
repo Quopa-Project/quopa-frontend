@@ -72,6 +72,11 @@ import { SeeRatings } from './branch/pages/see-ratings/see-ratings';
 import {MatExpansionModule} from "@angular/material/expansion";
 import { ManageJoinBookingDialog } from './client/dialogs/manage-join-booking.dialog/manage-join-booking.dialog';
 import { ManageJoinBookingsDialog } from './client/dialogs/manage-join-bookings.dialog/manage-join-bookings.dialog';
+import { CreateTournament } from './superadmin/pages/create-tournament/create-tournament';
+import { HomeTournamentStaff } from './core/pages/home-tournament-staff/home-tournament-staff';
+import { ManageTournaments } from './tournament-staff/pages/manage-tournaments/manage-tournaments';
+import { ProfileTournamentStaff } from './core/pages/profile-tournament-staff/profile-tournament-staff';
+import { TournamentDetail } from './tournament-staff/pages/tournament-detail/tournament-detail';
 
 @NgModule({
   declarations: [
@@ -118,7 +123,12 @@ import { ManageJoinBookingsDialog } from './client/dialogs/manage-join-bookings.
     CreateSeeRatingDialog,
     SeeRatings,
     ManageJoinBookingDialog,
-    ManageJoinBookingsDialog
+    ManageJoinBookingsDialog,
+    CreateTournament,
+    HomeTournamentStaff,
+    ManageTournaments,
+    ProfileTournamentStaff,
+    TournamentDetail
   ],
   imports: [
     BrowserModule,

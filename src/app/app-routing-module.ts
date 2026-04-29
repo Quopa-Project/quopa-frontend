@@ -31,6 +31,11 @@ import {ManageOccupancyTypes} from "./superadmin/pages/manage-occupancy-types/ma
 import {ManageBookings} from "./branch/pages/manage-bookings/manage-bookings";
 import {MyBookings} from "./client/pages/my-bookings/my-bookings";
 import {SeeRatings} from "./branch/pages/see-ratings/see-ratings";
+import {CreateTournament} from "./superadmin/pages/create-tournament/create-tournament";
+import {ManageTournaments} from "./tournament-staff/pages/manage-tournaments/manage-tournaments";
+import {tournamentStaffRoleGuard} from "./tournament-staff/guards/tournament-staff-role-guard";
+import {TournamentDetail} from "./tournament-staff/pages/tournament-detail/tournament-detail";
+import {tournamentIdExistsGuard} from "./tournament-staff/guards/tournament-id-exists-guard";
 
 const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noTokenGuard] },
@@ -48,6 +53,7 @@ const routes: Routes = [
       { path: 'manage-companies', component: ManageCompanies, canActivate: [correctRoleGuard, superadminRoleGuard] },
       { path: 'manage-sports', component: ManageSports, canActivate: [correctRoleGuard, superadminRoleGuard] },
       { path: 'manage-occupancy-types', component: ManageOccupancyTypes, canActivate: [correctRoleGuard, superadminRoleGuard] },
+      { path: 'create-tournament', component: CreateTournament, canActivate: [correctRoleGuard, superadminRoleGuard] },
       //Admin
       { path: 'manage-branches', component: ManageBranches, canActivate: [correctRoleGuard, adminRoleGuard] },
       { path: 'branch-detail/:id', component: BranchDetail, canActivate: [correctRoleGuard, adminRoleGuard, branchIdExistsGuard] },
@@ -61,7 +67,9 @@ const routes: Routes = [
       { path: 'book-court/:id', component: BookCourt, canActivate: [correctRoleGuard, clientRoleGuard, anyCourtIdExistsGuard] },
       { path: 'my-bookings', component: MyBookings, canActivate: [correctRoleGuard, clientRoleGuard] },
       { path: 'open-reservations', component: OpenReservations, canActivate: [correctRoleGuard, clientRoleGuard] },
-
+      //Tournament staff
+      { path: 'manage-tournaments', component: ManageTournaments, canActivate: [correctRoleGuard, tournamentStaffRoleGuard] },
+      { path: 'tournament-detail/:id', component: TournamentDetail, canActivate: [correctRoleGuard, tournamentStaffRoleGuard, tournamentIdExistsGuard] },
       { path: '', redirectTo: 'profile', pathMatch: 'full' },
       { path: '**', component: PageNotFound }
     ]

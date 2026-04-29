@@ -1,0 +1,109 @@
+<div style="display: flex; flex-direction: column; gap: 16px">
+    <mat-card style="background: #ffffff; margin: 10px 10px 0 10px; padding: 8px; display: flex; flex-direction: column; gap: 16px">
+        <h3 style="margin: 0">Configuración del Torneo</h3>
+        <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                <mat-label>Nombre del Torneo</mat-label>
+                <input matInput [(ngModel)]="tournament.name" [disabled]="tournamentNameValidated">
+            </mat-form-field>
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                <mat-label>Usuario (Manager)</mat-label>
+                <mat-select [(ngModel)]="tournament.userId" [disabled]="tournamentNameValidated">
+                    @for (user of users; track user.id) {
+                        <mat-option [value]="user.id">{{user.name}} {{user.lastName}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                <mat-label>Sucursal</mat-label>
+                <mat-select [(ngModel)]="tournament.branchId" [disabled]="tournamentNameValidated">
+                    @for (branch of branches; track branch.id) {
+                        <mat-option [value]="branch.id">{{branch.name}} - {{branch.company.name}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+            @if (!tournamentNameValidated) {
+                <button matButton="filled" (click)="searchTournament()">
+                    Validar Nombre
+                </button>
+            }
+        </div>
+    </mat-card>
+    @if (tournamentNameValidated) {
+        <div class="tournament-content">
+            <mat-card class="info-team">
+                <h3 style="margin: 0">Agregar Equipo</h3>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Nombre del Equipo</mat-label>
+                        <input matInput [(ngModel)]="team.name" [disabled]="teamNameValidated || loading">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Cantidad de Jugadores</mat-label>
+                        <input matInput type="number" min="1" [(ngModel)]="playerCount" [disabled]="teamNameValidated || loading">
+                    </mat-form-field>
+                    @if (!teamNameValidated) {
+                        <button matButton="filled" [disabled]="loading" (click)="searchTeam()">
+                            Validar Equipo
+                        </button>
+                    }
+                </div>
+                @if (teamNameValidated) {
+                    <div style="padding: 0 15px; display: flex; flex-direction: column; gap: 8px;">
+                        <h4 style="margin: 0">Jugadores del Equipo</h4>
+                        @for (player of team.players; track player.id; let i = $index) {
+                            <div style="display: flex; flex-direction: column">
+                                <div style="display: flex; gap: 15px;">
+                                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                                        <mat-label>Nombre #{{i + 1}}</mat-label>
+                                        <input matInput [(ngModel)]="player.name">
+                                    </mat-form-field>
+                                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                                        <mat-label>Número</mat-label>
+                                        <input matInput type="number" [(ngModel)]="player.number">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div>
+                        <button matButton="filled" (click)="addTeamToTournament()">
+                            Guardar Equipo y Agregar Otro
+                        </button>
+                    </div>
+                }
+            </mat-card>
+            <mat-card class="summary-teams">
+                <h3 style="margin: 0">Resumen del Torneo: {{tournament.name}}</h3>
+                @if (tournament.teams.length === 0) {
+                    <span>No hay equipos agregados todavía.</span>
+                } @else {
+                    <mat-accordion>
+                        @for (team of tournament.teams; track team.name) {
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        {{team.name}}
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+                                        {{team.players.length}} jugadores
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <ul>
+                                    @for (player of team.players; track player.id) {
+                                        <li>#{{player.number}} - {{player.name}}</li>
+                                    }
+                                </ul>
+                            </mat-expansion-panel>
+                        }
+                    </mat-accordion>
+                    <div>
+                        <button matButton="filled" (click)="saveTournament()">
+                            Guardar Torneo
+                        </button>
+                    </div>
+                }
+            </mat-card>
+        </div>
+    }
+</div>

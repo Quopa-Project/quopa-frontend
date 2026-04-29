@@ -20,6 +20,10 @@
                 <mat-icon>category</mat-icon>
                 <span>Tipos de Ocupación</span>
             </button>
+            <button matButton style="justify-content: flex-start" [routerLink]="['create-tournament']">
+                <mat-icon>emoji_events</mat-icon>
+                <span>Crear Torneo</span>
+            </button>
             <button matButton style="justify-content: flex-start" [routerLink]="['profile']">
                 <mat-icon>person</mat-icon>
                 <span>Perfil</span>
@@ -52,6 +56,12 @@
                 <div style="display: flex; flex-direction: column; align-items: center;">
                     <mat-icon>category</mat-icon>
                     <span>Ocupaciones</span>
+                </div>
+            </button>
+            <button matButton [routerLink]="['create-tournament']">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <mat-icon>emoji_events</mat-icon>
+                    <span>Torneo</span>
                 </div>
             </button>
             <button matButton [routerLink]="['profile']">

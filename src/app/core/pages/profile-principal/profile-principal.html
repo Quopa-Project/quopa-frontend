@@ -12,6 +12,9 @@
         @case ('CLIENT') {
             <app-profile-client></app-profile-client>
         }
+        @case ('TOURNAMENT_MANAGER') {
+            <app-profile-client></app-profile-client>
+        }
         @default {
             <app-page-not-found [injected]="true"></app-page-not-found>
         }

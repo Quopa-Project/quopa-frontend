@@ -3,6 +3,7 @@ import {UserDto} from "../../../core/models/user.dto";
 import {CompanyDto} from "../../../admin/models/company.dto";
 import {BranchDto} from "../../../admin/models/branch.dto";
 import {CourtDto} from "../../../branch/models/court.dto";
+import {TournamentDto} from "../../../superadmin/models/tournament.dto";
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,8 @@ export class UserAuxService {
   private branch: BranchDto = {} as BranchDto;
   private branchDetail: BranchDto = {} as BranchDto;
   private court: CourtDto = {} as CourtDto;
+
+  private tournamentDetail: TournamentDto = {} as TournamentDto;
 
   setUser(user: UserDto) {
     this.user = user;
@@ -38,6 +41,10 @@ export class UserAuxService {
     this.court = court;
   }
 
+  setTournamentDetail(tournamentDetail: TournamentDto) {
+    this.tournamentDetail = tournamentDetail;
+  }
+
   getUser() {
     return this.user;
   }
@@ -56,6 +63,10 @@ export class UserAuxService {
 
   getCourt() {
     return this.court;
+  }
+
+  getTournamentDetail() {
+    return this.tournamentDetail;
   }
 
   getUserRole(): string {

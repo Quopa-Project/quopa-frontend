@@ -12,6 +12,9 @@
         @case ('CLIENT') {
             <app-home-client [role]="role"></app-home-client>
         }
+        @case ('TOURNAMENT_MANAGER') {
+            <app-home-tournament-staff [role]="role"></app-home-tournament-staff>
+        }
         @default {
             <app-page-not-found [injected]="true"></app-page-not-found>
         }

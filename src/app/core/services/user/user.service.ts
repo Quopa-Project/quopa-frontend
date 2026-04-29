@@ -15,6 +15,14 @@ export class UserService extends BaseService<UserApiResponse>{
     this.basePath = this.basePath + 'users';
   }
 
+  getAllByTournamentManagerRole(): Observable<UserApiResponse> {
+    return this.http.get<UserApiResponse>(`${this.basePath}/tournament-manager-role`, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).pipe(catchError(this.handleError));
+  }
+
   update(id: number, body: UserDto): Observable<UserApiResponse> {
     return this.http.put<UserApiResponse>(`${this.basePath}/${id}`, body, {
       headers: {

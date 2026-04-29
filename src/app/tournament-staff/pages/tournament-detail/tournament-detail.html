@@ -1,0 +1,149 @@
+<div style="display: flex; flex-direction: column; height: 100%;">
+    <div style="margin: 10px; display: flex; justify-content: space-between; align-items: center;">
+        <h2 style="margin: 0">Torneo: {{ tournament.name }}</h2>
+        <button mat-button [routerLink]="['../../manage-tournaments']">
+            <mat-icon>arrow_back</mat-icon> Volver a torneos
+        </button>
+    </div>
+    <mat-tab-group style="margin: 0 10px; height: 50%; background: #ffffff;">
+        <mat-tab label="Tabla">
+            @if (dataLoaded === 1) {
+                <div style="margin: 8px; overflow: auto;">
+                    <table mat-table [dataSource]="table">
+                        <ng-container matColumnDef="team">
+                            <th mat-header-cell *matHeaderCellDef style="font-weight: 600; background: #f5f5f5"> Equipo </th>
+                            <td mat-cell *matCellDef="let t">
+                                {{ t.team.name }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="played">
+                            <th mat-header-cell *matHeaderCellDef style="font-weight: 600; background: #f5f5f5"> PJ </th>
+                            <td mat-cell *matCellDef="let t">
+                                {{ t.played }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="wins">
+                            <th mat-header-cell *matHeaderCellDef style="font-weight: 600; background: #f5f5f5"> G </th>
+                            <td mat-cell *matCellDef="let t">
+                                {{ t.wins }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="draws">
+                            <th mat-header-cell *matHeaderCellDef style="font-weight: 600; background: #f5f5f5"> E </th>
+                            <td mat-cell *matCellDef="let t">
+                                {{ t.draws }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="losses">
+                            <th mat-header-cell *matHeaderCellDef style="font-weight: 600; background: #f5f5f5"> P </th>
+                            <td mat-cell *matCellDef="let t">
+                                {{ t.losses }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="goalsFor">
+                            <th mat-header-cell *matHeaderCellDef style="font-weight: 600; background: #f5f5f5"> GF </th>
+                            <td mat-cell *matCellDef="let t">
+                                {{ t.goalsFor }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="goalsAgainst">
+                            <th mat-header-cell *matHeaderCellDef style="font-weight: 600; background: #f5f5f5"> GC </th>
+                            <td mat-cell *matCellDef="let t">
+                                {{ t.goalsAgainst }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="points">
+                            <th mat-header-cell *matHeaderCellDef style="font-weight: 600; background: #f5f5f5"> Pts </th>
+                            <td mat-cell *matCellDef="let t">
+                                <b>{{ t.points }}</b>
+                            </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                    </table>
+                </div>
+            } @else if (dataLoaded === 0) {
+                <div style="display: flex; justify-content: center; margin: 20px 0">
+                    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+                </div>
+            } @else {
+                <div style="display: flex; flex-direction: column; align-items: center; margin: 20px 0">
+                    <mat-icon>search_off</mat-icon>
+                    <span>No se encontraron datos en la tabla.</span>
+                </div>
+            }
+        </mat-tab>
+        <mat-tab label="Partidos">
+            <div style="margin: 8px; overflow: auto;">
+                <table mat-table [dataSource]="matches">
+                    <ng-container matColumnDef="homeTeam">
+                        <th mat-header-cell *matHeaderCellDef style="font-weight: 600; background: #f5f5f5"> Local </th>
+                        <td mat-cell *matCellDef="let m">
+                            {{ m.homeTeam.name }}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="score">
+                        <th mat-header-cell *matHeaderCellDef style="font-weight: 600; background: #f5f5f5; text-align: center"> Marcador </th>
+                        <td mat-cell *matCellDef="let m" style="text-align: center">
+                            {{ m.homeScore }} - {{ m.awayScore }}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="awayTeam">
+                        <th mat-header-cell *matHeaderCellDef style="font-weight: 600; background: #f5f5f5"> Visitante </th>
+                        <td mat-cell *matCellDef="let m">
+                            {{ m.awayTeam.name }}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="court">
+                        <th mat-header-cell *matHeaderCellDef style="font-weight: 600; background: #f5f5f5"> Cancha </th>
+                        <td mat-cell *matCellDef="let m">
+                            {{ m.court.description }}
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="matchDisplayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: matchDisplayedColumns"></tr>
+                </table>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+    <mat-card style="background: #ffffff; margin: 10px 10px 0 10px; padding: 8px; display: flex; flex-direction: column; gap: 16px">
+        <h3 style="margin: 0">Crear nuevo partido</h3>
+        <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                <mat-label>Cancha</mat-label>
+                <mat-select [(ngModel)]="match.courtId" [disabled]="savingMatch">
+                    @for (court of courts; track court.id) {
+                        <mat-option [value]="court.id">{{court.description}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                <mat-label>Equipo Local</mat-label>
+                <mat-select [(ngModel)]="match.homeTeamId" [disabled]="savingMatch">
+                    @for (team of teams; track team.id) {
+                        <mat-option [value]="team.id">{{team.name}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                <mat-label>Local</mat-label>
+                <input matInput type="number" [(ngModel)]="match.homeScore" [disabled]="savingMatch">
+            </mat-form-field>
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                <mat-label>Equipo Visitante</mat-label>
+                <mat-select [(ngModel)]="match.awayTeamId" [disabled]="savingMatch">
+                    @for (team of teams; track team.id) {
+                        <mat-option [value]="team.id">{{team.name}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                <mat-label>Visitante</mat-label>
+                <input matInput type="number" [(ngModel)]="match.awayScore" [disabled]="savingMatch">
+            </mat-form-field>
+            <button matButton="filled" (click)="createMatch()">
+                Crear partido
+            </button>
+        </div>
+    </mat-card>
+</div>
